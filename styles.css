@@ -280,11 +280,12 @@ main {
   padding-bottom: 6px;
 }
 
+
 .tips-msg {
   cursor: pointer;
   width: 26px;
   height: 26px;
-  background: url(./picture/icon-msg.png) no-repeat center / 24px;
+  background: url(./picture/icon-msg.png) no-repeat center / 100%;
 }
 
 .tips-content {
