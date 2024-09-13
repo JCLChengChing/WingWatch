@@ -1,3 +1,6 @@
+require('dotenv').config();
+
+
 function fetchOccurrences(map) {
   const pageSize = 30;
   const maxResults = 1000; // Maximum number of results to fetch
