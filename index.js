@@ -1,6 +1,6 @@
 function fetchOccurrences(map) {
   const pageSize = 30;
-  const maxResults = 5000; // Maximum number of results to fetch
+  const maxResults = 1000; // Maximum number of results to fetch
   let startIndex = 0;
   let totalRecords = 0;
   const centralLocation = { lat: -27.496237529626793, lng: 153.0128469683142 }; // UQ
@@ -110,12 +110,16 @@ function processOccurrences(data, map) {
       markers.push(marker);
 
       var infoWindowContent = `
-        <div>
-          <h2>${commonName} (${scientificName})</h2>
-          <h3>${location}</h3>
-          <p>Species: ${species}</p>
-          <p>Observed on: ${eventDate}</p>
-          <a href="https://www.google.com/maps?q=${lat},${lon}" target="_blank">View on Google Maps</a>
+        <div class="map-tips">
+          <div class="tips-title">
+            <h2>${commonName} </h2>
+            <a href="https://www.google.com/maps?q=${lat},${lon}" target="_blank" class="tips-msg"></a>
+          </div>
+          <div class="tips-content">
+            <h3>${location}</h3>
+            <p>Species: ${species}</p>
+            <p>Observed on: ${eventDate}</p>
+          </div>
         </div>
       `;
 
@@ -132,7 +136,7 @@ function processOccurrences(data, map) {
       });
 
       $("#records").append(
-        $('<section class="record">').append(
+        $('<section class="record map-item">').append(
           $('<h2>').text(commonName + " (" + scientificName + ")"),
           $('<h3>').text(location),
           $('<p>').text("Species: " + species),
