@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Collection</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar">
+      <ul class="nav-items">
+        <li><a href="index.html">
+            <div class="icon-wrapper"><img src="picture/bird-icon.png" alt="Bird" style="width: 50px; height: auto;" />
+            </div>
+          </a></li>
+        <div class="grouped-icons">
+          <li><a href="index.html"><img src="picture/home-icon.png" alt="Home" /><img src="picture/home-icon-on.png"
+                class="on" alt="Home" /></a></li>
+          <li class="on"><a href="collect.html"><img src="picture/eye-icon.png" alt="View" style="width: 32px; height: 32px;"/><img
+                src="picture/eye-icon-on.png" class="on" alt="View" style="width: 32px; height: 32px;"/></a></li>
+          <li><a href="gallery.html"><img src="picture/gallery-icon.png" alt="Gallery" /><img
+                src="picture/gallery-icon-on.png" class="on" alt="Gallery" /></a></li>
+        </div>
+        <li class="settings"><a href="setting.html"><img src="picture/settings-icon.png" alt="Settings" /></a></li>
+      </ul>
+    </nav>
+    <div class="content">
+      <div class="top-box">
+        <header>
+          <h1 style="font-size: 56px; font-family: 'Anuphan'">MyCollection</h1>
+        </header>
+        <div class="top-so">
+          <form class="search-bar" action="" onsubmit="return soSubmit(this);">
+            <input id="search-input" type="text" name="keys" placeholder="Search" required>
+          </form>
+        </div>
+        <div class="top-icon">
+          <a href="#">
+            <img src="picture/user_account.png">
+          </a>
+        </div>
+      </div>
+      <div class="collect">
+        <div class="left-add">
+          <img src="picture/collect_charts.png">
+        </div>
+        <div class="list-page">
+          <div class="list">
+            <div class="picture-item">
+              <img src="picture/collect_1.png">
+              <p>Australian White Ibis</p>
+            </div>
+            <div class="picture-item">
+              <img src="picture/collect_2.png">
+              <p>Green Head Duck</p>
+            </div>
+            <div class="picture-item">
+              <img src="picture/collect_3.png">
+              <p>White Face Owl</p>
+            </div>
+            <div class="picture-item">
+              <img src="picture/collect_4.png">
+              <p>Canadian White Goose</p>
+            </div>
+            <div class="picture-item">
+              <img src="picture/collect_5.png">
+              <p>Tasmanian Flame Robin</p>
+            </div>
+            <div class="picture-item">
+              <img src="picture/collect_6.png">
+              <p>American Wild Eagle</p>
+            </div>
+          </div>
+          <div class="page">
+            <a href="#"><img src="picture/icon-left.png"></a>
+            <a href="#" style="color: black;">1</a>
+            <a href="#" style="color: #7f7f7f;">2</a>
+            <a href="#" style="color: #7f7f7f;">3</a>
+            <a href="#" style="color: #7f7f7f;">4</a>
+            <a href="#" style="color: #7f7f7f;">5</a>
+            <span>...</span>
+            <a href="#"><img src="picture/icon-right.png"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="jquery.min.js"></script>
+  <script src="common.js"></script>
+</body>
+
+</html>
