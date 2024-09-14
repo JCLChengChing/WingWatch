@@ -190,6 +190,7 @@ header p {
   font-family: Anuphan, Arial, Helvetica, sans-serif;
 }
 
+/* Existing styles for the search bar */
 .search-bar {
   display: flex;
   justify-content: center;
@@ -206,6 +207,36 @@ header p {
   background: url(./picture/icon-search.png) no-repeat center left / 24px;
   font-size: 28px;
 }
+
+.autocomplete {
+  position: relative;
+  width: 380px; 
+}
+
+#suggestions-List {
+  position: absolute;
+  top: 40px; 
+  left: 0;
+  width: 100%;
+  border: 1px solid #000000;
+  border-top: none;
+  background-color: white;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none; /* Start hidden */
+}
+
+#suggestions-List li {
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 18px; 
+}
+
+#suggestions-List li:hover {
+  background-color: #f0f0f0;
+}
+
 
 /* .search-bar button {
   padding: 8px 15px;

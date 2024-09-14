@@ -89,84 +89,6 @@ function fetchOccurrences(map, centralLocation, radius) {
 }
 
 
-function processAllOccurrences(occurrences, map, centralLocation) {
-  console.log("Total occurrences received:", occurrences.length);
-
-  // Calculate distance between two points on the Earth's surface
-  function calculateDistance(lat1, lon1, lat2, lon2) {
-    const R = 6371; // Radius of the Earth in km
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLon = (lon2 - lon1) * Math.PI / 180;
-    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-      Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c; // Distance in km
-  }
-
-  // Filter out occurrences without location or date
-  const minDate = new Date('2010-01-01').getTime();
-
-  // Filter and add distances
-  let occurrencesWithDetails = occurrences
-    .filter(occurrence => 
-      occurrence.decimalLatitude && 
-      occurrence.decimalLongitude && 
-      occurrence.eventDate &&
-      occurrence.species &&
-      new Date(occurrence.eventDate).getTime() >= minDate
-    )
-    .map(occurrence => ({
-      ...occurrence,
-      distance: calculateDistance(
-        centralLocation.lat, 
-        centralLocation.lng, 
-        occurrence.decimalLatitude, 
-        occurrence.decimalLongitude
-      ),
-      timestamp: new Date(occurrence.eventDate).getTime()
-    }));
-
-  // Sort by distance (ascending)
-  occurrencesWithDetails.sort((a, b) => a.distance - b.distance);
-
-  // Get distinct species in distinct locations
-  const distinctSpecies = new Set();
-  const selectedOccurrences = [];
-  const maxOccurrences = 5; // Limit to 5 occurrences
-  const minDistanceBetweenMarkers = 0.3; // Minimum 0.3 km between markers
-  
-  for (let occurrence of occurrencesWithDetails) {
-    if (selectedOccurrences.length >= maxOccurrences) break;
-    
-    // Check if this species is already selected
-    if (!distinctSpecies.has(occurrence.species)) {
-      // Check if this location is far enough from all previously selected locations
-      const isFarEnough = selectedOccurrences.every(selected => 
-        calculateDistance(
-          selected.decimalLatitude, 
-          selected.decimalLongitude, 
-          occurrence.decimalLatitude, 
-          occurrence.decimalLongitude
-        ) >= minDistanceBetweenMarkers
-      );
-
-      // If so, add this occurrence to the selected list
-      if (isFarEnough) {
-        distinctSpecies.add(occurrence.species);
-        selectedOccurrences.push(occurrence);
-      }
-    }
-  }
-
-  console.log("Distinct occurrences to be displayed:", selectedOccurrences.length);
-  console.log("Occurrences:", selectedOccurrences);
-
-  // Process and display the occurrences
-  processOccurrences({ occurrences: selectedOccurrences }, map);
-}
-
-
 
 
 function processOccurrences(data, map) {
@@ -279,6 +201,98 @@ function processOccurrences(data, map) {
     );
   });
 }
+
+
+function processAllOccurrences(occurrences, map, centralLocation) {
+  console.log("Total occurrences received:", occurrences.length);
+
+  // Calculate distance between two points on the Earth's surface
+  function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Radius of the Earth in km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c; // Distance in km
+  }
+
+
+
+    function getAllScientificNames(occurrences) {
+        return [...new Set(occurrences.map(occurrence => occurrence.scientificName).filter(Boolean))];
+    }
+
+    function getAllCommonNames(occurrences) {
+        return [...new Set(occurrences.map(occurrence => occurrence.vernacularName || species).filter(Boolean))];
+    }
+
+    window.scientificNames = getAllScientificNames(occurrences); // Populate scientific names
+    window.commonNames = getAllCommonNames(occurrences); // Populate common names
+
+  // Filter out occurrences without location or date
+  const minDate = new Date('2010-01-01').getTime();
+
+  // Filter and add distances
+  let occurrencesWithDetails = occurrences
+    .filter(occurrence => 
+      occurrence.decimalLatitude && 
+      occurrence.decimalLongitude && 
+      occurrence.eventDate &&
+      occurrence.species &&
+      new Date(occurrence.eventDate).getTime() >= minDate
+    )
+    .map(occurrence => ({
+      ...occurrence,
+      distance: calculateDistance(
+        centralLocation.lat, 
+        centralLocation.lng, 
+        occurrence.decimalLatitude, 
+        occurrence.decimalLongitude
+      ),
+      timestamp: new Date(occurrence.eventDate).getTime()
+    }));
+
+  // Sort by distance (ascending)
+  occurrencesWithDetails.sort((a, b) => a.distance - b.distance);
+
+  // Get distinct species in distinct locations
+  const distinctSpecies = new Set();
+  const selectedOccurrences = [];
+  const maxOccurrences = 5; // Limit to 5 occurrences
+  const minDistanceBetweenMarkers = 0.3; // Minimum 0.3 km between markers
+  
+  for (let occurrence of occurrencesWithDetails) {
+    if (selectedOccurrences.length >= maxOccurrences) break;
+    
+    // Check if this species is already selected
+    if (!distinctSpecies.has(occurrence.species)) {
+      // Check if this location is far enough from all previously selected locations
+      const isFarEnough = selectedOccurrences.every(selected => 
+        calculateDistance(
+          selected.decimalLatitude, 
+          selected.decimalLongitude, 
+          occurrence.decimalLatitude, 
+          occurrence.decimalLongitude
+        ) >= minDistanceBetweenMarkers
+      );
+
+      // If so, add this occurrence to the selected list
+      if (isFarEnough) {
+        distinctSpecies.add(occurrence.species);
+        selectedOccurrences.push(occurrence);
+      }
+    }
+  }
+
+  console.log("Distinct occurrences to be displayed:", selectedOccurrences.length);
+  console.log("Occurrences:", selectedOccurrences);
+
+  // Process and display the occurrences
+  processOccurrences({ occurrences: selectedOccurrences }, map);
+}
+
 
 
 

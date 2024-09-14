@@ -38,7 +38,10 @@
         </header>
         <div>
           <form class="search-bar" action="" onsubmit="return soSubmit(this);">
-            <input id="search-input" type="text" name="keys" placeholder="Search" required>
+            <div class="autocomplete">
+              <input id="search-input" type="text" name="keys" placeholder="Search" required>
+              <ul id="suggestions-List" class="suggestions-list"></ul>
+            </div>
           </form>
           <div class="timeframe-buttons">
             <button id="week-btn">2 Weeks</button>
@@ -110,8 +113,10 @@
   <div id="loading" style="display: none;">Loading...</div>
 
   <script src="jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="maps-loader.js"></script>
   <script src="index.js"></script>
+  <script src="search.js"></script>
   <script src="common.js"></script>
   <script src="modal-pop-up.js"></script>
   <script src="location-picker.js"></script>
