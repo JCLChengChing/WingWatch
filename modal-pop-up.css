@@ -1,0 +1,140 @@
+.modal-pop-up {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.modal-pop-up-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 24px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.modal-pop-up-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: -10px;
+    margin-right: -10px;
+}
+
+.modal-pop-up-close:hover,
+.modal-pop-up-close:focus {
+    color: rgb(243, 108, 39);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#modal-pop-up-specimen-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.modal-pop-up-form-group {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.modal-pop-up-form-group label {
+    display: block;
+    margin-bottom: 8px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.modal-pop-up-form-group input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.modal-pop-up-submit,
+.modal-pop-up-form-group button {
+    margin-top: 10px;
+    padding: 12px 24px;
+    background-color: rgb(243, 108, 39);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.modal-pop-up-submit:hover,
+.modal-pop-up-form-group button:hover {
+    background-color: rgb(243, 194, 174);
+    color: #333;
+}
+
+
+
+/* pop-up window for the location selection */
+
+#location-picker-modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+}
+
+#location-picker-map {
+    width: 70%;
+    height: 70%;
+    margin: 5% auto;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+#location-picker-confirm-button {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1002;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(243, 108, 39);
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+#location-picker-confirm-button:hover {
+    background-color: rgb(243, 194, 174);
+    color: #333;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+
+
