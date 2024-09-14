@@ -45,6 +45,12 @@ function fetchOccurrences(map, centralLocation, radius) {
     const maxResults = 5000;
     let startIndex = 0;
     let allOccurrences = [];
+    
+  const cacheData = localStorage.getItem('cacheData');
+
+
+
+
 
     function fetchPage() {
         console.log(`Fetching page starting at index ${startIndex}...`);
@@ -170,6 +176,7 @@ function processOccurrences(data, map) {
   console.log("Processing occurrences:", data.occurrences.length);
 
   let currentInfoWindow = null;
+  let birdNumber = 0;
 
   // Clear existing markers
   globalMarkers.forEach(marker => marker.setMap(null));
@@ -192,11 +199,12 @@ function processOccurrences(data, map) {
         map: map,
         title: scientificName || species,
         icon: {
-          url: 'picture/bird-location.png',
+          url: 'picture/bird' + (birdNumber%5 + 1) + '-location.png',
           scaledSize: new google.maps.Size(64, 64)
         }
+      
       });
-
+      birdNumber++;
       globalMarkers.push(marker);
 
       var infoWindowContent = `
