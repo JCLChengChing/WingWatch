@@ -11,7 +11,7 @@ function updateTimeframeUI() {
 function setTimeframe(timeframe) {
   currentTimeframe = timeframe;
   updateTimeframeUI();
-  fetchOccurrences(map, getCurrentMapCenter(), 5);
+  fetchOccurrences(map, getCurrentMapCenter(), 5); // Use a fixed radius of 5 km
 }
 
 
@@ -47,6 +47,7 @@ function fetchOccurrences(map, centralLocation, radius) {
     let allOccurrences = [];
 
     function fetchPage() {
+      // Fetch occurrences from the ALA API
         console.log(`Fetching page starting at index ${startIndex}...`);
         $.ajax({
             url: 'https://biocache-ws.ala.org.au/ws/occurrences/search',
@@ -84,7 +85,6 @@ function fetchOccurrences(map, centralLocation, radius) {
             }
         });
     }
-
     fetchPage();
 }
 
@@ -92,6 +92,7 @@ function fetchOccurrences(map, centralLocation, radius) {
 function processAllOccurrences(occurrences, map, centralLocation) {
   console.log("Total occurrences received:", occurrences.length);
 
+  // Calculate distance between two points on the Earth's surface
   function calculateDistance(lat1, lon1, lat2, lon2) {
     const R = 6371; // Radius of the Earth in km
     const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -103,6 +104,7 @@ function processAllOccurrences(occurrences, map, centralLocation) {
     return R * c; // Distance in km
   }
 
+  // Filter out occurrences without location or date
   const minDate = new Date('2010-01-01').getTime();
 
   // Filter and add distances
@@ -132,8 +134,8 @@ function processAllOccurrences(occurrences, map, centralLocation) {
   const distinctSpecies = new Set();
   const selectedOccurrences = [];
   const maxOccurrences = 5; // Limit to 5 occurrences
-  const minDistanceBetweenMarkers = 0.3; // Minimum 0.5 km between markers
-
+  const minDistanceBetweenMarkers = 0.3; // Minimum 0.3 km between markers
+  
   for (let occurrence of occurrencesWithDetails) {
     if (selectedOccurrences.length >= maxOccurrences) break;
     
@@ -149,6 +151,7 @@ function processAllOccurrences(occurrences, map, centralLocation) {
         ) >= minDistanceBetweenMarkers
       );
 
+      // If so, add this occurrence to the selected list
       if (isFarEnough) {
         distinctSpecies.add(occurrence.species);
         selectedOccurrences.push(occurrence);
