@@ -1,6 +1,6 @@
 let globalMarkers = [];
 
-let currentTimeframe = 'year'; // Default timeframe
+let currentTimeframe = 'month'; // Default timeframe
 
 function updateTimeframeUI() {
   $('.timeframe-buttons button').removeClass('selected');
@@ -175,6 +175,15 @@ function processOccurrences(data, map) {
   globalMarkers.forEach(marker => marker.setMap(null));
   globalMarkers = [];
 
+  // Array of bird image URLs
+  const birdImages = [
+    'picture/image1.png',
+    'picture/image2.png',
+    'picture/image3.png',
+    'picture/image4.png',
+    'picture/image5.png'
+  ];
+
   $.each(data.occurrences, function (index, occurrence) {
     var scientificName = occurrence.scientificName;
     var species = occurrence.species;
@@ -187,13 +196,15 @@ function processOccurrences(data, map) {
     if (species && lat && lon) {
       console.log(`Creating marker for ${commonName || species} at ${lat}, ${lon}`);
       
+      var birdImageUrl = birdImages[index % birdImages.length];
+
       var marker = new google.maps.Marker({
         position: { lat: parseFloat(lat), lng: parseFloat(lon) },
         map: map,
         title: scientificName || species,
         icon: {
-          url: 'picture/bird-location.png',
-          scaledSize: new google.maps.Size(64, 64)
+          url: birdImageUrl,
+          scaledSize: new google.maps.Size(54, 64)
         }
       });
 
@@ -201,16 +212,24 @@ function processOccurrences(data, map) {
 
       var infoWindowContent = `
         <div class="map-tips">
-          <div class="tips-title">
-            <h2>${commonName || species}</h2>
-            <a href="https://www.google.com/maps?q=${lat},${lon}" target="_blank" class="tips-msg"></a>
-          </div>
-          <div class="tips-content">
-            <h3>${location}</h3>
-            <p>Species: ${species}</p>
-            <p>Scientific Name: ${scientificName || 'N/A'}</p>
-            <p>Observed on: ${eventDate}</p>
-          </div>
+            <div class="tips-title">
+                <h2>${commonName || species}</h2>
+                <a href="https://www.google.com/maps?q=${lat},${lon}" target="_blank" class="tips-msg">
+                    <span class="google-maps-link">Google Maps</span>
+                </a>
+            </div>
+            <div class="tips-content">
+                <h3>${location}</h3>
+                <p>Species: ${species}</p>
+                <p>Scientific Name: ${scientificName || 'N/A'}</p>
+                <p>Observed on: ${eventDate}</p>
+            </div>
+            <div class="tips-footer">
+                <button class="more-btn">More</button>
+                <div class="tips-image">
+                    <img src="picture/icon-msg.png" alt="Bird Location" width="32" height="32">
+                </div>
+            </div>            
         </div>
       `;
 
