@@ -23,11 +23,11 @@ function onCollect() {
 }
 
 
-$(function () {
-  $('.map-item').click(function () {
-    $('.map-tips,.right-info').toggle();
-  });
-  $('.map-tips .tips-msg').click(function () {
-    alert('播放')
-  });
-});
+// $(function () {
+//   $('.map-item').click(function () {
+//     $('.map-tips,.right-info').toggle();
+//   });
+//   $('.map-tips .tips-msg').click(function () {
+//     alert('播放')
+//   });
+// });

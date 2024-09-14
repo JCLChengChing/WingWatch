@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WingWatch</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" >
+  <link rel="stylesheet" href="modal-pop-up.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 
 </head>
 
@@ -15,53 +16,41 @@
     <nav class="navbar">
       <ul class="nav-items">
         <li><a href="index.html">
-            <div class="icon-wrapper"><img src="picture/bird-icon.png" alt="Bird" style="width: 50px; height: auto;" />
+            <div class="navicon-wrapper"><img src="picture/bird-icon.png" alt="Bird" style="width: 50px; height: auto;" />
             </div>
           </a></li>
-        <div class="grouped-icons">
-          <li class="on"><a href="index.html"><img src="picture/home-icon.png" alt="Home" /><img
-                src="picture/home-icon-on.png" class="on" alt="Home" /></a></li>
+        <div class="nav-grouped-icons">
+          <li class="navicon"><a href="index.html"><img src="picture/home-icon.png" alt="Home" /><img
+                src="picture/home-icon-on.png" class="navicon" alt="Home" /></a></li>
           <li><a href="collect.html"><img src="picture/eye-icon.png" alt="View" style="width: 32px; height: 32px;" /><img src="picture/eye-icon-on.png"
-                class="on" alt="View" /></a></li>
+                class="navicon" alt="View" /></a></li>
           <li><a href="gallery.html"><img src="picture/gallery-icon.png" alt="Gallery" /><img
-                src="picture/gallery-icon-on.png" class="on" alt="Gallery" /></a></li>
+                src="picture/gallery-icon-on.png" class="navicon" alt="Gallery" /></a></li>
         </div>
-        <li class="settings"><a href="setting.html"><img src="picture/settings-icon.png" alt="Settings" /></a></li>
+        <li class="nav-setting"><a href="setting.html"><img src="picture/settings-icon.png" alt="Setting" /></a></li>
       </ul>
     </nav>
-    <div class="content">
+    <div class="all-content">
       <div class="top-box">
         <header>
           <h1>WingWatch</h1>
-          <p style="font-size: 20px; font-family: 'Anuphan'">Birdwatching Made Effortless</p>
+          <p>Birdwatching Made Effortless</p>
         </header>
-        <div class="top-so">
+        <div>
           <form class="search-bar" action="" onsubmit="return soSubmit(this);">
             <input id="search-input" type="text" name="keys" placeholder="Search" required>
           </form>
-          <div class="time-buttons">
-            <button>Week</button>
-            <button>Month</button>
-            <button>Year</button>
+          <div class="timeframe-buttons">
+            <button id="week-btn">2 Weeks</button>
+            <button id="month-btn">Month</button>
+            <button id="year-btn">Year</button>
           </div>
         </div>
       </div>
       <main>
         <div id="map"></div>
         <div class="map-fixed">
-          <div class="map-tips" style="display: none;">
-            <div class="tips-title">Flame Robin<span class="tips-msg"></span></div>
-            <div class="tips-content">Male Flame Robins have a bright orange breast and throat, 
-              and are white on the lower belly and undertail. 
-              The top of their head and back is dark slate grey 
-              and there is a clear white stripe on the folded ...
-              <a href="#" target="more" 
-              style="font-size: 14px; color: orange; text-decoration: underline;">
-              More
-             </a>
-            </div>
-          </div>
-          <img class="map-item" src="picture/bird-location.png" alt="Bird Location">
+          
         </div>
       </main>
     </div>
@@ -69,47 +58,63 @@
       <div class="picture-item">
         <img src="picture/bird-picture.png">
       </div>
-      <div class="time-buttons">
-        <button>Last seen</button>
+      <div class="record-buttons">
+        <button style="background-color: rgb(243 194 174);">Last seen</button>
         <button>Record</button>
       </div>
       <div class="right-content">
         <h2>No Record</h2>
-        <p>No Record No Record No Record No Record No Record No Record No Record No Record No Record </p>
-        <p>No Record No Record No Record No Record No Record No Record No Record No Record No Record </p>
-        <p>No Record No Record No Record No Record No Record No Record No Record No Record No Record </p>
-        <p>No Record No Record No Record No Record No Record No Record No Record No Record No Record </p>
-        <p>No Record No Record No Record No Record No Record No Record No Record No Record No Record </p>
-        <p>No Record No Record No Record No Record No Record No Record No Record No Record No Record </p>
+        <p>-------------------------------------------------------------------</p>
+        <p>-------------------------------------------------------------------</p>
+        <p>-------------------------------------------------------------------</p>
+        <p>-------------------------------------------------------------------</p>
+        <p>-------------------------------------------------------------------</p>
+        <p>-------------------------------------------------------------------</p>
+        
       </div>
-      <div class="time-buttons add">
+      <div class="collect-button">
         <button onclick="openModal()">Collect</button>
       </div>
     </div>
   </div>
 
 
-  <div id="uploadModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Upload Specimen Information</h2>
-      <form id="specimenForm">
-        <input type="file" id="imageUpload" accept="image/*" required>
-        <input type="text" placeholder="Location"> 
-        <input type="text" id="species" placeholder="Species" required>
-        <input type="datetime-local" id="time" required>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+    <div id="modal-pop-up-upload" class="modal-pop-up">
+      <div class="modal-pop-up-content">
+          <span class="modal-pop-up-close">&times;</span>
+          <h2>Upload Specimen Information</h2>
+          <form id="modal-pop-up-specimen-form">
+              <div class="modal-pop-up-form-group">
+                  <input type="file" id="modal-pop-up-image-upload" accept="image/*" required>
+              </div>
+              <div class="modal-pop-up-form-group">
+                  <input type="text" id="modal-pop-up-location" placeholder="Location" readonly>
+                  <button type="button" onclick="openLocationPickerModal()">Select Location</button>
+              </div>
+              <div class="modal-pop-up-form-group">
+                  <input type="text" id="modal-pop-up-species" placeholder="Species" required>
+              </div>
+              <div class="modal-pop-up-form-group">
+                  <input type="datetime-local" id="modal-pop-up-time" required>
+              </div>
+              <button type="submit" class="modal-pop-up-submit">Submit</button>
+          </form>
+      </div>
   </div>
 
+  <div id="location-picker-modal">
+    <div id="location-picker-map"></div>
+    <button id="location-picker-confirm-button">Confirm Location</button>
+  </div>
+
+  <div id="loading" style="display: none;">Loading...</div>
 
   <script src="jquery.min.js"></script>
   <script src="maps-loader.js"></script>
   <script src="index.js"></script>
   <script src="common.js"></script>
-  <script src="modal.js"></script>
-
+  <script src="modal-pop-up.js"></script>
+  <script src="location-picker.js"></script>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 </body>
-
 </html>
