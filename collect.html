@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Collection</title>
+  <title>WingWatch-MyCollection</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -17,21 +17,20 @@
             </div>
           </a></li>
         <div class="nav-grouped-icons">
-          <li class="navicon"><a href="index.html"><img src="picture/home-icon.png" alt="Home" /><img
-                src="picture/home-icon-on.png" class="navicon" alt="Home" /></a></li>
-          <li><a href="collect.html"><img src="picture/eye-icon.png" alt="View" style="width: 32px; height: 32px;" /><img src="picture/eye-icon-on.png"
-                class="navicon" alt="View" /></a></li>
+          <li><a href="index.html"><img src="picture/home-icon.png" alt="Home" /><img src="picture/home-icon-on.png"
+                class="navicon" alt="Home" /></a></li>
+          <li class="navicon"><a href="collect.html"><img src="picture/eye-icon.png" alt="View" style="width: 32px; height: 32px;"/><img
+                src="picture/eye-icon-on.png" class="navicon" alt="View" style="width: 32px; height: 32px;"/></a></li>
           <li><a href="gallery.html"><img src="picture/gallery-icon.png" alt="Gallery" /><img
                 src="picture/gallery-icon-on.png" class="navicon" alt="Gallery" /></a></li>
         </div>
-        <li class="nav-setting"><a href="setting.html"><img src="picture/settings-icon.png" alt="Setting" /></a></li>
+        <li class="nav-setting"><a href="setting.html"><img src="picture/settings-icon.png" alt="Settings" /></a></li>
       </ul>
     </nav>
     <div class="all-content">
       <div class="top-box">
         <header>
-          <h1>WingWatch</h1>
-          <p>Birdwatching Made Effortless</p>
+          <h1 style="font-size: 46px; margin-top: -2px; font-family: 'Anuphan', Arial, Helvetica, sans-serif">MyCollection</h1>
         </header>
         <div>
           <form class="search-bar" action="" onsubmit="return soSubmit(this);">
@@ -44,13 +43,13 @@
           </a>
         </div>
       </div>
-      <div class="collect">
-        <div class="left-add">
-          <img src="picture/collect_charts.png">
-        </div>
+      <div class="collect listmid">
         <div class="list-page">
           <div class="list">
-            <div class="picture-item">
+            <div class="picture-item ball">
+              <img src="picture/ball.png">
+            </div>
+            <div class="picture-item" style="display: none;">
               <img src="picture/collect_1.png">
               <p>Australian White Ibis</p>
             </div>
@@ -85,12 +84,56 @@
             <span>...</span>
             <a href="#"><img src="picture/icon-right.png"></a>
           </div>
+          <div class="info" style="display: none;">
+            <div class="pics">
+              <img src="picture/ball1.png">
+              <div class="picture-item">
+                <img src="picture/ibis upload.png">
+              </div>
+              <img src="picture/ball2.png">
+            </div>
+            <div class="desc">
+              <div class="head">
+                <img src="picture/left.png" class="back">
+                <a href="./gallery.html"><img src="picture/imgs.png"></a>
+              </div>
+              <div class="text">
+                <div>
+                  <p>Location: Brisbane City</p>
+                  <p>Species: Australian White Ibis</p>
+                  <p>Nickname: Bin Bird</p>
+                  <p>Date: 10/09/2024 07:34 PM</p>
+                </div>
+              </div>
+              <div class="imgs">
+                <img src="picture/maps.jpg">
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <script src="jquery.min.js"></script>
   <script src="common.js"></script>
+  <script>
+    $(function(){
+      $('.picture-item').click(function(){
+        if($(this).hasClass('ball')){
+          $('.picture-item.ball').remove();
+          $('.picture-item').show();
+        }
+        $('.list-page .list').hide();
+        $('.list-page .page').hide();
+        $('.list-page .info').fadeIn();
+      });
+      $('.list-page .desc .head .back').click(function(){
+        $('.list-page .info').hide();
+        $('.list-page .list').fadeIn();
+        $('.list-page .page').fadeIn();
+      });
+    });
+  </script>
 </body>
 
 </html>

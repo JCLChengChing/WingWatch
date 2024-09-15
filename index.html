@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WingWatch</title>
+  <title>WingWatch - Homepage</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="modal-pop-up.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
@@ -41,7 +41,9 @@
             <div class="autocomplete">
               <input id="search-input" type="text" name="keys" placeholder="Search" required>
               <ul id="suggestions-List" class="suggestions-list"></ul>
+              <span class="clear-search"><a href="index.html">Clear</a></span>
             </div>
+
           </form>
           <div class="timeframe-buttons">
             <button id="week-btn">2 Weeks</button>
@@ -59,7 +61,7 @@
     </div>
     <div class="right-info" style="display: none;">
       <div class="picture-item">
-        <img src="picture/bird-picture.png">
+        <img src="picture/ibis-info-img.png">
       </div>
       <div class="record-buttons">
         <button style="background-color: rgb(243 194 174);">Last seen</button>
@@ -100,7 +102,9 @@
               <div class="modal-pop-up-form-group">
                   <input type="datetime-local" id="modal-pop-up-time" required>
               </div>
-              <button type="submit" class="modal-pop-up-submit">Submit</button>
+              <!-- <button type="submit" class="modal-pop-up-submit">Submit</button> -->
+               <a href="./collect.html" style="margin-top: 10px; padding: 12px 24px; background-color: rgb(243, 108, 39); color: white; border: none; cursor: pointer; border-radius: 25px; font-size: 16px; font-weight: bold; transition: all 0.3s ease;">Submit</a>
+
           </form>
       </div>
   </div>
@@ -110,7 +114,12 @@
     <button id="location-picker-confirm-button">Confirm Location</button>
   </div>
 
-  <div id="loading" style="display: none;">Loading...</div>
+  <div id="loading"></div>
+
+
+</div>
+<script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+
 
   <script src="jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
