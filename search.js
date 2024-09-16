@@ -46,21 +46,23 @@ $(document).ready(function() {
         const selectedName = $(this).text();
         $('#search-input').val(selectedName);
         $('#suggestions-List').empty().hide();
+        $('#search-input').focus(); // Keep focus on the search input
     });
 
     // Event handler to detect click outside the input and list
-  $(document).on('click', function (event) {
-    const isClickInside = $(event.target).closest('#search-input, #suggestions-list').length > 0;
+    $(document).on('click', function (event) {
+        const isClickInside = $(event.target).closest('#search-input, #suggestions-list').length > 0;
 
-    if (!isClickInside) {
-        const suggestionsList = $('#suggestions-list');
+        if (!isClickInside) {
+            const suggestionsList = $('#suggestions-list');
 
-        // If there are items in the list, select the first one
-        if (suggestionsList.children('li').length > 0) {
-            const firstSuggestion = suggestionsList.children('li:first').text();
-            $('#search-input').val(firstSuggestion);
+            // If there are items in the list, select the first one
+            if (suggestionsList.children('li').length > 0) {
+                const firstSuggestion = suggestionsList.children('li:first').text();
+                $('#search-input').val(firstSuggestion);
+            }
+            suggestionsList.empty().hide(); // Hide the suggestions list
+            $('#search-input').focus(); // Keep focus on the search input
         }
-        suggestionsList.empty().hide(); // Hide the suggestions list
-    }
-  });
+    });
 });
