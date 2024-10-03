@@ -88,23 +88,24 @@
       <div class="modal-pop-up-content">
           <span class="modal-pop-up-close">&times;</span>
           <h2>Upload Specimen Information</h2>
-          <form id="modal-pop-up-specimen-form">
+          <!-- send user data into php file-->>
+          <form id="modal-pop-up-specimen-form"  >
               <div class="modal-pop-up-form-group">
-                  <input type="file" id="modal-pop-up-image-upload" accept="image/*" required>
+                  <input type="file" id="modal-pop-up-image-upload" name = "image" accept="image/*" required>
               </div>
               <div class="modal-pop-up-form-group">
-                  <input type="text" id="modal-pop-up-location" placeholder="Location" readonly>
+                  <input type="text" id="modal-pop-up-location" name = "location" placeholder="Location" readonly>
                   <button type="button" onclick="openLocationPickerModal()">Select Location</button>
               </div>
               <div class="modal-pop-up-form-group">
-                  <input type="text" id="modal-pop-up-species" placeholder="Species" required>
+                  <input type="text" id="modal-pop-up-species" name = "species"placeholder="Species" required>
               </div>
               <div class="modal-pop-up-form-group">
-                  <input type="datetime-local" id="modal-pop-up-time" required>
+                  <input type="datetime-local" name = "time" id="modal-pop-up-time" required>
               </div>
-              <!-- <button type="submit" class="modal-pop-up-submit">Submit</button> -->
-               <a href="./collect.html" style="margin-top: 10px; padding: 12px 24px; background-color: rgb(243, 108, 39); color: white; border: none; cursor: pointer; border-radius: 25px; font-size: 16px; font-weight: bold; transition: all 0.3s ease;">Submit</a>
-
+               <button type="submit" class="modal-pop-up-submit">Submit</button>
+<!--                <a href="./collect.html" style="margin-top: 10px; padding: 12px 24px; background-color: rgb(243, 108, 39); color: white; border: none; cursor: pointer; border-radius: 25px; font-size: 16px; font-weight: bold; transition: all 0.3s ease;">Submit</a>
+ -->
           </form>
       </div>
   </div>
