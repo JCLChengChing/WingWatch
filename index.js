@@ -85,7 +85,6 @@ function fetchOccurrences(map, centralLocation, radius) {
           }
       });
   }
-
   fetchPage();
 }
 
@@ -167,7 +166,10 @@ window.commonNames = getAllCommonNames(occurrences); // Populate common names
           }
       }
   }
-
+  console.log("Occurrences with distances:");
+      selectedOccurrences.forEach(occurrence => {
+        console.log(`Species: ${occurrence.species}, Distance: ${occurrence.distance.toFixed(2)} km`);
+      });
   console.log("Distinct species to be displayed:", selectedOccurrences.length);
   console.log("Occurrences:", selectedOccurrences);
 
