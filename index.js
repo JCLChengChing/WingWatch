@@ -344,29 +344,6 @@ $(document).ready(function() {
    
 });
 
-
-
-
-// function handleMapDrag(map) {
-//   google.maps.event.addListener(map, 'dragend', function() {
-//       showLoading(); // Show loading overlay immediately when map is dragged
-
-//       var center = map.getCenter();
-//       var centralLocation = {
-//           lat: center.lat(),
-//           lng: center.lng()
-//       };
-      
-//       var radius = 5; // 5 km radius
-
-//       fetchOccurrences(map, centralLocation, radius);
-//   });
-// }
-
-
-
-
-
 function handleMapDrag(map) {
   google.maps.event.addListener(map, 'dragend', function() {
       var bounds = map.getBounds();
@@ -375,15 +352,17 @@ function handleMapDrag(map) {
           lat: center.lat(),
           lng: center.lng()
       };
-      // Estimate the radius based on the map's zoom level
-      var zoom = map.getZoom();
-      var radius = 40000 / Math.pow(2, zoom); // Rough estimate in km
+      // Store the current zoom level
+      var currentZoom = map.getZoom();
+      var radius = 40000 / Math.pow(2, currentZoom); // Rough estimate in km
 
       if (currentSearchTerm) {
           searchBirds(currentSearchTerm);
       } else {
           fetchOccurrences(map, centralLocation, radius);
       }
+      // Ensure the zoom level doesn't change
+      map.setZoom(currentZoom);
   });
 }
 
@@ -476,8 +455,8 @@ function searchBirds(searchTerm) {
   currentSearchTerm = searchTerm;
   showLoading();
   const centralLocation = getCurrentMapCenter();
-  const zoom = map.getZoom();
-  const radius = 40000 / Math.pow(2, zoom); // Use the same radius calculation as in handleMapDrag
+  const currentZoom = map.getZoom(); // Store the current zoom
+  const radius = 40000 / Math.pow(2, currentZoom);
 
   const dateRange = getDateRange(currentTimeframe);
   const lowerSearchTerm = searchTerm.toLowerCase();
@@ -509,6 +488,7 @@ function searchBirds(searchTerm) {
           });
           response.occurrences = filteredOccurrences;
           processSearchResults(response, map);
+          map.setZoom(currentZoom); // Ensure zoom level doesn't change
           hideLoading();
       },
       error: function(xhr, status, error) {
@@ -602,11 +582,6 @@ function processSearchResults(data, map) {
 
       // Process and display the occurrences
       processOccurrences({ occurrences: selectedOccurrences }, map);
-
-      // Fit the map to show all markers
-      const bounds = new google.maps.LatLngBounds();
-      globalMarkers.forEach(marker => bounds.extend(marker.getPosition()));
-      map.fitBounds(bounds);
 
       // Update the sidebar
       updateSidebar(selectedOccurrences);

@@ -21,13 +21,3 @@ document.getElementById('search-input').addEventListener('blur', function() {
 function onCollect() {
   location.href = 'collect.html';
 }
-
-
-// $(function () {
-//   $('.map-item').click(function () {
-//     $('.map-tips,.right-info').toggle();
-//   });
-//   $('.map-tips .tips-msg').click(function () {
-//     alert('播放')
-//   });
-// });
