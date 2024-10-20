@@ -511,7 +511,7 @@ main {
   height: 15%;
   transform: translate(-50%, -50%);
   background-color: rgba(0, 0, 0, 0.7);
-  background-image: url("./picture/loading.gif");
+  background-image: url("/picture/loading.gif");
   background-size: contain;
   background-position: center;
   color: white;

@@ -708,3 +708,4 @@ $(function () {
     autoScroll('.slider-up');
   }, 3000);
 })
+
