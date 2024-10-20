@@ -41,14 +41,14 @@ $(function(){
     }
 
     function showInfo(imagePath, location, species, time, lat, lon) {
-      // Format the time to remove 'T'
-      const formattedTime = time.replace('T', ' ');
-
       $('.list-page .list').hide();
       $('.list-page .page').hide();
       $('.list-page .info').fadeIn();
-  
+
       $('#info-image').attr('src', imagePath);
+      
+      const formattedTime = time.replace('T', ' ');
+      
       $('#bird-info').html(`
         <p>Species: ${species}</p>
         <p>Time: ${formattedTime}</p>
@@ -77,7 +77,6 @@ $(function(){
         // Add the "add" item at the beginning
         const addItem = $('<div>').addClass('picture-item add');
         addItem.append($('<span>').text('+'));
-        addItem.click(openModal); // Open modal when clicking the "+" item
         listDiv.append(addItem);
   
         records.forEach((record, index) => {
@@ -97,16 +96,18 @@ $(function(){
               entryId = line.replace('Entry ID:', '').trim();
             } else if (line.startsWith('Location:')) {
               location = line.replace('Location:', '').trim();
+              // Parse latitude and longitude from the location string
+              const latLngMatch = location.match(/Lat: ([-\d.]+), Lng: ([-\d.]+)/);
+              if (latLngMatch) {
+                lat = parseFloat(latLngMatch[1]);
+                lon = parseFloat(latLngMatch[2]);
+              }
             } else if (line.startsWith('Species:')) {
               species = line.replace('Species:', '').trim();
             } else if (line.startsWith('Time:')) {
               time = line.replace('Time:', '').trim();
             } else if (line.startsWith('Image:')) {
               imagePath = line.replace('Image:', '').trim();
-            } else if (line.startsWith('Latitude:')) {
-              lat = parseFloat(line.replace('Latitude:', '').trim());
-            } else if (line.startsWith('Longitude:')) {
-              lon = parseFloat(line.replace('Longitude:', '').trim());
             }
           });
   
