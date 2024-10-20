@@ -1,9 +1,17 @@
+/**
+ * Bird Search Module
+ * This module handles the search functionality for bird names, including autocomplete suggestions.
+ */
+
 $(document).ready(function() {
     const birdOccurrences = []; // This will hold all occurrences fetched from the API.
     scientificNames = window.scientificNames; // Populate scientific names
     commonNames = window.commonNames; // Populate common names
 
-    // Function to update the suggestions list based on the user's input.
+    /**
+     * Updates the suggestions list based on the user's input.
+     * @param {string} searchText - The text entered by the user in the search input
+     */
     function updateSuggestionsList(searchText) {
         // Check for matches in common names first
         let matchingNames = commonNames.filter(name => name.toLowerCase().startsWith(searchText.toLowerCase()));
@@ -19,11 +27,12 @@ $(document).ready(function() {
         const suggestionsList = $('#suggestions-List');
         suggestionsList.empty();
 
+        // Populate the suggestions list
         matchingNames.forEach(name => {
             suggestionsList.append(`<li>${name}</li>`);
         });
         
-        // Hide suggestions if no matches found
+        // Show or hide suggestions based on matches
         if (matchingNames.length === 0) {
             suggestionsList.hide();
         } else {
@@ -31,7 +40,7 @@ $(document).ready(function() {
         }
     }
 
-    // Event handler for when the user types in the search input.
+    // Event handler for when the user types in the search input
     $('#search-input').on('input', function() {
         const searchText = $(this).val();
         if (searchText.length >= 2) {
@@ -41,7 +50,7 @@ $(document).ready(function() {
         }
     });
 
-    // Event handler for clicking on a suggestion.
+    // Event handler for clicking on a suggestion
     $('#suggestions-List').on('click', 'li', function() {
         const selectedName = $(this).text();
         $('#search-input').val(selectedName);

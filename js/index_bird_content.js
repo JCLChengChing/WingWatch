@@ -1,3 +1,13 @@
+/**
+ * Bird Content Module
+ * This module handles the functionality for updating the sidebar with bird sightings,
+ * managing the display of records and last seen locations, and handling the modal popup.
+ */
+
+/**
+ * Updates the sidebar with the latest bird sightings
+ * @param {Array} occurrences - An array of bird sighting occurrences
+ */
 function updateSidebar(occurrences) {
   // Clear the current record and location list
   $("#records").empty();
@@ -23,20 +33,26 @@ function updateSidebar(occurrences) {
   $("#location-list").html(locationsHtml);
 }
 
-// Function to handle the click event on the location list items
+/**
+ * Zooms the map to a specific location
+ * @param {number} lat - Latitude of the location
+ * @param {number} lon - Longitude of the location
+ */
 function zoomToLocation(lat, lon) {
   // Assuming your map instance is stored in a variable called `map`
   map.setCenter({lat: parseFloat(lat), lng: parseFloat(lon)});
   map.setZoom(20); // Zoom in closer to the location
 }
 
+// DOM Content Loaded event listener
 document.addEventListener('DOMContentLoaded', function() {
+  // Get DOM elements
   const lastSeenBtn = document.getElementById('last-seen-btn');
   const recordBtn = document.getElementById('record-btn');
-  
   const recordsDiv = document.getElementById('records');
   const lastFiveLocationsDiv = document.getElementById('last-five-locations');
 
+  // Define color constants
   const selectedColor = 'rgb(243, 108, 39)'; // Darker orange color
   const unselectedColor = 'rgb(243, 194, 174)'; // Lighter orange color
 
@@ -46,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
   lastSeenBtn.style.backgroundColor = selectedColor;
   recordBtn.style.backgroundColor = unselectedColor;
 
+  // Event listener for Last Seen button
   lastSeenBtn.addEventListener('click', function() {
     lastFiveLocationsDiv.style.display = 'block';
     recordsDiv.style.display = 'none';
@@ -54,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
     recordBtn.style.backgroundColor = unselectedColor;
   });
 
+  // Event listener for Record button
   recordBtn.addEventListener('click', function() {
     lastFiveLocationsDiv.style.display = 'none';
     recordsDiv.style.display = 'block';
@@ -67,27 +85,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Get the modal
+  // Modal handling
   var modal = document.getElementById("modal-pop-up-upload");
-
-  // Get the button that opens the modal
   var btn = document.getElementById("open-modal-btn");
-
-  // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("modal-pop-up-close")[0];
 
-  // When the user clicks the button, open the modal 
+  // Open modal when button is clicked
   btn.onclick = function() {
     modal.style.display = "block";
     console.log("Modal should be open now");
   }
 
-  // When the user clicks on <span> (x), close the modal
+  // Close modal when (x) is clicked
   span.onclick = function() {
     modal.style.display = "none";
   }
 
-  // When the user clicks anywhere outside of the modal, close it
+  // Close modal when clicking outside of it
   window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = "none";
@@ -95,7 +109,10 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Make sure this function is defined globally
+/**
+ * Opens the modal popup
+ * This function is defined globally for accessibility from other scripts
+ */
 function openModal() {
   alert("openModal function called");
   var modal = document.getElementById("modal-pop-up-upload");

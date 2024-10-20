@@ -1,13 +1,24 @@
+/**
+ * Bird Sighting Application
+ * This module handles the main functionality for fetching, processing, and displaying bird sightings on a map.
+ */
+
 let globalMarkers = [];
-
 let currentTimeframe = 'month'; // Default timeframe
+let currentSearchTerm = '';
 
+/**
+ * Updates the UI to reflect the current timeframe selection
+ */
 function updateTimeframeUI() {
   $('.timeframe-buttons button').removeClass('selected');
   $(`#${currentTimeframe}-btn`).addClass('selected');
 }
 
-
+/**
+ * Sets the current timeframe and updates the map accordingly
+ * @param {string} timeframe - The new timeframe to set ('week', 'month', or 'year')
+ */
 function setTimeframe(timeframe) {
   currentTimeframe = timeframe;
   updateTimeframeUI();
@@ -18,7 +29,11 @@ function setTimeframe(timeframe) {
   }
 }
 
-
+/**
+ * Calculates the date range based on the current timeframe
+ * @param {string} timeframe - The current timeframe ('week', 'month', or 'year')
+ * @returns {Object} An object containing start and end dates
+ */
 function getDateRange(timeframe) {
   const now = new Date();
   let startDate;
@@ -39,7 +54,12 @@ function getDateRange(timeframe) {
   };
 }
 
-
+/**
+ * Fetches bird occurrences from the API
+ * @param {Object} map - The map object
+ * @param {Object} centralLocation - The central location for the search
+ * @param {number} radius - The search radius
+ */
 function fetchOccurrences(map, centralLocation, radius) {
   showLoading();
   const dateRange = getDateRange(currentTimeframe);
@@ -89,9 +109,12 @@ function fetchOccurrences(map, centralLocation, radius) {
   fetchPage();
 }
 
-
-
-
+/**
+ * Processes all bird occurrences and displays them on the map
+ * @param {Array} occurrences - An array of bird occurrences
+ * @param {Object} map - The map object
+ * @param {Object} centralLocation - The central location for the search
+ */
 function processAllOccurrences(occurrences, map, centralLocation) {
   console.log("Total occurrences received:", occurrences.length);
 
@@ -184,10 +207,11 @@ function processAllOccurrences(occurrences, map, centralLocation) {
   updateSidebar(selectedOccurrences);
 }
 
-
-
-
-
+/**
+ * Processes bird occurrences and displays them on the map
+ * @param {Object} data - The data object containing bird occurrences
+ * @param {Object} map - The map object
+ */
 function processOccurrences(data, map) {
   console.log("Processing occurrences:", data.occurrences.length);
 
@@ -283,14 +307,12 @@ function processOccurrences(data, map) {
   updateSidebar(data.occurrences);
 }
 
-
-
-
-
-
 // Initialize and add the map
 let map;
 
+/**
+ * Initializes the map and sets up the necessary event listeners
+ */
 async function initMap() {
   const defaultPosition = {
     lat: -27.496237529626793,
@@ -322,6 +344,10 @@ async function initMap() {
   fetchOccurrences(map, defaultPosition, initialRadius);
 }
 
+/**
+ * Gets the current map center
+ * @returns {Object} An object containing latitude and longitude
+ */
 function getCurrentMapCenter() {
   if (!map) {
     console.error('Map is not initialized');
@@ -337,6 +363,10 @@ function getCurrentMapCenter() {
   };
 }
 
+/**
+ * Sets the current timeframe and updates the map accordingly
+ * @param {string} timeframe - The new timeframe to set ('week', 'month', or 'year')
+ */
 function setTimeframe(timeframe) {
   currentTimeframe = timeframe;
   updateTimeframeUI();
@@ -347,6 +377,9 @@ function setTimeframe(timeframe) {
 }
 }
 
+/**
+ * Updates the UI to reflect the current timeframe selection
+ */
 function updateTimeframeUI() {
   $('.timeframe-buttons button').removeClass('selected');
   $(`#${currentTimeframe}-btn`).addClass('selected');
@@ -359,7 +392,10 @@ $(document).ready(function () {
 
 });
 
-
+/**
+ * Sets up drag event handler for the map
+ * @param {Object} map - The map object
+ */
 function handleMapDrag(map) {
   google.maps.event.addListener(map, 'dragend', function () {
     var bounds = map.getBounds();
@@ -382,22 +418,35 @@ function handleMapDrag(map) {
   });
 }
 
-
-
+/**
+ * Shows the loading spinner
+ */
 function showLoading() {
   $('#loading').show();
 }
 
+/**
+ * Hides the loading spinner
+ */
 function hideLoading() {
   $('#loading').hide();
 }
 
+/**
+ * Gets the year from a given year string
+ * @param {string} year - The year string
+ * @returns {string} The year in the format 'YYYY'
+ */
 function getYear(year) {
   if (year) {
     return year.match(/[\d]{4}/);
   }
 }
 
+/**
+ * Iterates over the records and displays them in the UI
+ * @param {Object} data - The data object containing records
+ */
 function iterateRecords(data) {
   console.log(data);
   $("#records").empty(); // Clear previous records
@@ -451,7 +500,9 @@ $(document).ready(function () {
   });
 });
 
-
+/**
+ * Sets up event listener for the select location button
+ */
 document.addEventListener('DOMContentLoaded', function () {
   const selectLocationBtn = document.querySelector('button[onclick="openMapModal()"]');
   if (selectLocationBtn) {
@@ -464,8 +515,10 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-let currentSearchTerm = '';
-
+/**
+ * Searches for birds based on the search term
+ * @param {string} searchTerm - The search term to use
+ */
 
 function searchBirds(searchTerm) {
   currentSearchTerm = searchTerm;
@@ -517,9 +570,11 @@ function searchBirds(searchTerm) {
   });
 }
 
-
-
-
+/**
+ * Processes search results and displays them on the map
+ * @param {Object} data - The data object containing search results
+ * @param {Object} map - The map object
+ */
 function processSearchResults(data, map) {
   if (data.occurrences && data.occurrences.length > 0) {
     const centralLocation = getCurrentMapCenter();
@@ -605,9 +660,10 @@ function processSearchResults(data, map) {
   }
 }
 
-
-
-
+/**
+ * Updates the sidebar with the occurrences
+ * @param {Array} occurrences - An array of bird occurrences
+ */
 function updateSidebar(occurrences) {
   $("#records").empty();
 
@@ -630,6 +686,10 @@ function updateSidebar(occurrences) {
   $("#records").html(recordsHtml);
 }
 
+/**
+ * Automatically scrolls the slider up
+ * @param {Object} obj - The object to animate
+ */
 function autoScroll(obj) {
   $(obj).find('span').animate({
     marginTop: '-30px'
@@ -648,6 +708,3 @@ $(function () {
     autoScroll('.slider-up');
   }, 3000);
 })
-
-
-

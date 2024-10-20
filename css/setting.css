@@ -1,107 +1,111 @@
+/*
+ * Settings Page Styles
+ * This stylesheet defines the visual appearance for the settings page of the application.
+ * It includes styles for the top box, settings sections, options, and dark mode.
+ */
 
- /* Top Box Styling */
-  .top-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .top-box header h1 {
-    font-size: 36px;
-    font-weight: 600;
-    color: #333;
-  }
-  
-  .top-so form {
-    display: flex;
-    max-width: 300px;
-  }
-  
-  #search-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-  }
-  
-  /* Settings Page Styling */
-  .settings {
-    margin-top: 30px;
-  }
-  
-  .settings h2 {
-    font-size: 28px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .settings-section {
-    margin-bottom: 30px;
-  }
-  
-  .settings-section h3 {
-    font-size: 18px;
-    margin-bottom: 5px;
-    color: #666;
-  }
-  
-  .settings-section p {
-    font-size: 14px;
-    margin-bottom: 15px;
-    color: #888;
-  }
-  
-  /* Styling for Settings Options */
-  .settings-option {
-    background-color: #eb8314;
-    padding: 20px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    cursor: pointer;
-  }
-  
-  .settings-option:hover {
-    background-color: #e6f0ff;
-  }
-  
-  .settings-option img {
-    width: 24px;
-    margin-right: 10px;
-  }
-  
-  .settings-option span {
-    font-size: 16px;
-    font-weight: 500;
-  }
-  
-  .toggle {
-    color: #000409;
-    font-size: 16px;
-  }
-  
-  /* Dark Mode Styles */
+/* Top Box Styling */
+.top-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-box header h1 {
+  font-size: 36px;
+  font-weight: 600;
+  color: #333;
+}
+
+.top-so form {
+  display: flex;
+  max-width: 300px;
+}
+
+#search-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* Settings Page Styling */
+.settings {
+  margin-top: 30px;
+}
+
+.settings h2 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.settings-section {
+  margin-bottom: 30px;
+}
+
+.settings-section h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.settings-section p {
+  font-size: 14px;
+  margin-bottom: 15px;
+  color: #888;
+}
+
+/* Styling for Settings Options */
+.settings-option {
+  background-color: #eb8314; /* Orange background */
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.settings-option:hover {
+  background-color: #e6f0ff; /* Light blue on hover */
+}
+
+.settings-option img {
+  width: 24px;
+  margin-right: 10px;
+}
+
+.settings-option span {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.toggle {
+  color: #000409;
+  font-size: 16px;
+}
+
+/* Dark Mode Styles */
 .dark-mode {
-    background-color: #1c1c1c;
-    color: #f1f1f1;
-  }
-  
-  .dark-mode .settings-option {
-    background-color: #333;
-    color: #fff;
-  }
-  
-  .dark-mode .navbar {
-    background-color: #2a2a2a;
-  }
-  
-  .dark-mode #search-input {
-    background-color: #2a2a2a;
-    color: #f1f1f1;
-    border: 1px solid #555;
-  }
-  
+  background-color: #1c1c1c;
+  color: #f1f1f1;
+}
+
+.dark-mode .settings-option {
+  background-color: #333;
+  color: #fff;
+}
+
+.dark-mode .navbar {
+  background-color: #2a2a2a;
+}
+
+.dark-mode #search-input {
+  background-color: #2a2a2a;
+  color: #f1f1f1;
+  border: 1px solid #555;
+}

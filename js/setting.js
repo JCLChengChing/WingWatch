@@ -1,30 +1,42 @@
+/**
+ * Settings Module
+ * This module handles dark mode toggle and dynamic content loading.
+ */
+
 document.addEventListener("DOMContentLoaded", function () {
   const darkThemeToggle = document.querySelector(".toggle");
 
+  // Check if dark mode was previously enabled
+  if (localStorage.getItem("dark-mode") === "enabled") {
+    enableDarkMode();
+  }
 
-    if (localStorage.getItem("dark-mode") === "enabled") {
+  // Event listener for dark mode toggle
+  darkThemeToggle.addEventListener("click", function () {
+    if (localStorage.getItem("dark-mode") !== "enabled") {
       enableDarkMode();
+    } else {
+      disableDarkMode();
     }
+  });
 
-    darkThemeToggle.addEventListener("click", function () {
-      if (localStorage.getItem("dark-mode") !== "enabled") {
-        enableDarkMode();
-      } else {
-        disableDarkMode();
-      }
-    });
+  /**
+   * Enables dark mode
+   */
+  function enableDarkMode() {
+    document.body.classList.add("dark-mode");
+    darkThemeToggle.textContent = "On";
+    localStorage.setItem("dark-mode", "enabled");
+  }
 
-    function enableDarkMode() {
-      document.body.classList.add("dark-mode");
-      darkThemeToggle.textContent = "On";
-      localStorage.setItem("dark-mode", "enabled");
-    }
-
-    function disableDarkMode() {
-      document.body.classList.remove("dark-mode");
-      darkThemeToggle.textContent = "Off";
-      localStorage.setItem("dark-mode", "disabled");
-    }
+  /**
+   * Disables dark mode
+   */
+  function disableDarkMode() {
+    document.body.classList.remove("dark-mode");
+    darkThemeToggle.textContent = "Off";
+    localStorage.setItem("dark-mode", "disabled");
+  }
 });
 
 $(document).ready(function () {
@@ -33,18 +45,14 @@ $(document).ready(function () {
     url: 'get_data.php',
     method: 'GET',
     success: function (data) {
-           $('#user-image').attr('src', data);
-          },
-          error: function() {
-              console.error('Error loading image.');
-    
+      $('#user-image').attr('src', data);
     },
-    error: function (xhr, status, error) {
-      console.error('Error loading data:', error);
+    error: function(xhr, status, error) {
+      console.error('Error loading image:', error);
     }
   });
 
-  // Existing click event handlers
+  // Event handler for clicking on picture items
   $(document).on("click", ".picture-item", function () {
     if ($(this).hasClass("add")) {
       openModal();
@@ -57,7 +65,7 @@ $(document).ready(function () {
       $(".list-page .page").hide();
       $(".list-page .info").fadeIn();
 
-      // Display the selected item in detail (example for further implementation)
+      // Display the selected item in detail
       const entry = $(this);
       const selectedHtml = `
         <div>
@@ -71,10 +79,10 @@ $(document).ready(function () {
     }
   });
 
+  // Event handler for back button in detail view
   $(".list-page .desc .head .back").click(function () {
     $(".list-page .info").hide();
     $(".list-page .list").fadeIn();
     $(".list-page .page").fadeIn();
   });
 });
-

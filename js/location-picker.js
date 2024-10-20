@@ -1,3 +1,9 @@
+/**
+ * Location Picker Module
+ * This module handles the functionality for picking a location on a map.
+ */
+
+// Global variables
 let locationPickerMap;
 let locationPickerMarker;
 let pickedLocation = null;
@@ -6,6 +12,7 @@ const defaultLocation = {
     lng: 153.0128469683142
 };
 
+// Event listener for when the DOM content is loaded
 document.addEventListener('DOMContentLoaded', function() {
     var modal = document.getElementById("modal-pop-up-upload");
     var locationPickerModal = document.getElementById("location-picker-modal");
@@ -16,18 +23,23 @@ document.addEventListener('DOMContentLoaded', function() {
         locationPickerModal.style.display = 'none';
     }
 
+    /**
+     * Opens the main modal
+     */
     function openModal() {
         if (modal) {
             modal.style.display = "block";
         }
     }
 
+    // Close modal when clicking on span
     if (span) {
         span.onclick = function() {
             modal.style.display = "none";
         }
     }
 
+    // Close modals when clicking outside
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
@@ -37,8 +49,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Make openModal function globally accessible
     window.openModal = openModal;
 
+    /**
+     * Opens the location picker modal
+     */
     window.openLocationPickerModal = function() {
         console.log("openLocationPickerModal called");
         var locationPickerModal = document.getElementById('location-picker-modal');
@@ -61,12 +77,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Add event listener to confirm button
     var confirmButton = document.getElementById('location-picker-confirm-button');
     if (confirmButton) {
         confirmButton.addEventListener('click', confirmPickedLocation);
     }
 });
 
+/**
+ * Initializes the location picker map
+ */
 function initLocationPickerMap() {
     console.log("initLocationPickerMap called");
     if (typeof L === 'undefined') {
@@ -80,14 +100,17 @@ function initLocationPickerMap() {
         return;
     }
 
+    // Initialize the map
     locationPickerMap = L.map('location-picker-map').setView([defaultLocation.lat, defaultLocation.lng], 15);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(locationPickerMap);
 
+    // Add a marker at the default location
     locationPickerMarker = L.marker([defaultLocation.lat, defaultLocation.lng]).addTo(locationPickerMap);
     pickedLocation = defaultLocation;
 
+    // Add click event to update marker position
     locationPickerMap.on('click', function(e) {
         updateLocationPickerMarker(e.latlng);
     });
@@ -98,6 +121,10 @@ function initLocationPickerMap() {
     locationPickerMap.invalidateSize();
 }
 
+/**
+ * Updates the location picker marker position
+ * @param {Object} latLng - The new latitude and longitude
+ */
 function updateLocationPickerMarker(latLng) {
     if (locationPickerMarker) {
         locationPickerMarker.setLatLng(latLng);
@@ -105,6 +132,9 @@ function updateLocationPickerMarker(latLng) {
     pickedLocation = latLng;
 }
 
+/**
+ * Confirms the picked location and updates the input field
+ */
 function confirmPickedLocation() {
     if (pickedLocation) {
         var locationInput = document.getElementById('modal-pop-up-location');

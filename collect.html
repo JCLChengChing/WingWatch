@@ -5,18 +5,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WingWatch-MyCollection</title>
+  <!-- External CSS files -->
   <link rel="stylesheet" href="css/styles.css"> 
   <link rel="stylesheet" href="css/modal-pop-up.css">
+  <!-- Leaflet CSS for maps -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+</head>
 
 <body>
   <div class="container">
+    <!-- Navigation bar -->
     <nav class="navbar">
       <ul class="nav-items">
+        <!-- Home icon -->
         <li><a href="index.html">
             <div class="navicon-wrapper"><img src="picture/bird-icon.png" alt="Bird" style="width: 50px; height: auto;" />
             </div>
           </a></li>
+        <!-- Navigation icons -->
         <div class="nav-grouped-icons">
           <li><a href="index.html"><img src="picture/home-icon.png" alt="Home" /><img src="picture/home-icon-on.png"
                 class="navicon" alt="Home" /></a></li>
@@ -25,15 +31,18 @@
           <li><a href="gallery.html"><img src="picture/gallery-icon.png" alt="Gallery" /><img
                 src="picture/gallery-icon-on.png" class="navicon" alt="Gallery" /></a></li>
         </div>
+        <!-- Settings icon -->
         <li class="nav-setting"><a href="setting.html"><img src="picture/settings-icon.png" alt="Settings" /></a></li>
       </ul>
     </nav>
     <div class="all-content">
+      <!-- Top section with title, search bar, and user icon -->
       <div class="top-box">
         <header>
           <h1 style="font-size: 46px; margin-top: -2px; font-family: 'Anuphan', Arial, Helvetica, sans-serif">MyCollection</h1>
         </header>
         <div>
+          <!-- Search form -->
           <form class="search-bar" action="" onsubmit="return soSubmit(this);">
             <input id="search-input" type="text" name="keys" placeholder="Search" required>
           </form>
@@ -44,14 +53,16 @@
           </a>
         </div>
       </div>
+      <!-- Main content area -->
       <div class="collect listmid">
         <div class="list-page">
           <div class="list">
             <!-- Dynamic content will be inserted here -->
           </div>
-          <!-- Add this button to open the modal -->
+          <!-- Button to open the add specimen modal -->
           <button id="open-modal-btn" class="add-specimen-btn">+</button>
           
+          <!-- Detailed info section (hidden by default) -->
           <div class="info" style="display: none;">
             <div class="pics">
               <img src="picture/ball1.png">
@@ -78,43 +89,53 @@
       </div>
     </div>
   </div>
+  
+  <!-- Modal for uploading specimen information -->
   <div id="modal-pop-up-upload" class="modal-pop-up">
     <div class="modal-pop-up-content">
       <span class="modal-pop-up-close">&times;</span>
       <h2>Upload Specimen Information</h2>
-      <form id="modal-pop-up-specimen-form" action = "submit_data.php" method ="POST" enctype ="multipart/form-data">
+      <form id="modal-pop-up-specimen-form" action="submit_data.php" method="POST" enctype="multipart/form-data">
+        <!-- Image upload section -->
         <div class="modal-file">
           <div class="icon">+</div>
           <div class="file" id="modal-pop-up-image-name"></div>
-          <input type="file" id="modal-pop-up-image-upload" name = "image" accept="image/*" required>
+          <input type="file" id="modal-pop-up-image-upload" name="image" accept="image/*" required>
         </div>
+        <!-- Location input section -->
         <div class="modal-pop-up-form-group">
-          <input type="text" id="modal-pop-up-location" name = "location" placeholder="Location" readonly>
+          <input type="text" id="modal-pop-up-location" name="location" placeholder="Location" readonly>
           <button type="button" onclick="openLocationPickerModal()">Select Location</button>
         </div>
+        <!-- Species input section -->
         <div class="modal-pop-up-form-group">
-          <input type="text" id="modal-pop-up-species" name = "species" placeholder="Species" required>
+          <input type="text" id="modal-pop-up-species" name="species" placeholder="Species" required>
         </div>
+        <!-- Time input section -->
         <div class="modal-pop-up-form-group">
-          <input type="datetime-local"  name = "time" id="modal-pop-up-time" required>
+          <input type="datetime-local" name="time" id="modal-pop-up-time" required>
         </div>
+        <!-- Submit button -->
         <button type="submit" class="modal-pop-up-submit" style="margin-top: 10px; padding: 12px 24px; background-color: rgb(243, 108, 39); color: white; border: none; cursor: pointer; border-radius: 25px; font-size: 16px; font-weight: bold; transition: all 0.3s ease;">
           Submit
-      </button>
+        </button>
       </form>
     </div>
   </div>
 
+  <!-- Modal for location picker -->
   <div id="location-picker-modal">
     <div id="location-picker-map"></div>
     <button id="location-picker-confirm-button">Confirm Location</button>
   </div>
 
+  <!-- JavaScript files -->
   <script src="js/jquery.min.js"></script>
   <script src="js/common.js"></script>
   <script src="js/location-picker.js"></script>
   <script src="js/collect.js"></script>
   <script src="js/modal-pop-up.js"></script>
+  <!-- Leaflet JavaScript for maps -->
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   <script src="js/pop-up-map.js"></script>
 </body>

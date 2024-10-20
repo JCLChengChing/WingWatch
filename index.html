@@ -5,21 +5,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WingWatch - Homepage</title>
+  <!-- External CSS files -->
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/modal-pop-up.css">
   <link rel="stylesheet" href="css/index_bird.css">
+  <!-- Leaflet CSS for maps -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 </head>
 
 <body>
   <div class="container">
+    <!-- Navigation bar -->
     <nav class="navbar">
       <ul class="nav-items">
+        <!-- Home icon -->
         <li><a href="index.html">
             <div class="navicon-wrapper"><img src="picture/bird-icon.png" alt="Bird"
                 style="width: 50px; height: auto;" />
             </div>
           </a></li>
+        <!-- Navigation icons -->
         <div class="nav-grouped-icons">
           <li class="navicon"><a href="index.html"><img src="picture/home-icon.png" alt="Home" /><img
                 src="picture/home-icon-on.png" class="navicon" alt="Home" /></a></li>
@@ -29,13 +34,16 @@
           <li><a href="gallery.html"><img src="picture/gallery-icon.png" alt="Gallery" /><img
                 src="picture/gallery-icon-on.png" class="navicon" alt="Gallery" /></a></li>
         </div>
+        <!-- Settings icon -->
         <li class="nav-setting"><a href="setting.html"><img src="picture/settings-icon.png" alt="Setting" /></a></li>
       </ul>
     </nav>
     <div class="all-content">
+      <!-- Top section with title, slogan, and search bar -->
       <div class="top-box">
         <header>
           <h1>WingWatch</h1>
+          <!-- Animated slogan -->
           <p class="slider-box">
             <span>Discover the</span>
             <span class="slider-up">
@@ -49,13 +57,14 @@
           </p>
         </header>
         <div>
+          <!-- Search form with autocomplete -->
           <form class="search-bar" action="" onsubmit="return soSubmit(this);">
             <div class="autocomplete">
               <input id="search-input" type="text" name="keys" placeholder="Search" required>
               <ul id="suggestions-List" class="suggestions-list"></ul>
             </div>
-
           </form>
+          <!-- Timeframe selection buttons -->
           <div class="timeframe-buttons">
             <button id="week-btn">2 Weeks</button>
             <button id="month-btn">Month</button>
@@ -63,25 +72,25 @@
           </div>
         </div>
       </div>
+      <!-- Main content area with map -->
       <main>
         <div id="map"></div>
-        <div class="map-fixed">
-
-        </div>
+        <div class="map-fixed"></div>
       </main>
     </div>
+    <!-- Right sidebar for bird information -->
     <div class="right-info" style="display: none;">
       <div class="picture-item">
         <img src="picture/ibis-info-img.png">
       </div>
+      <!-- Buttons for last seen and record -->
       <div class="record-buttons">
         <button id="last-seen-btn" style="background-color: rgb(243 194 174);">Last seen</button>
         <button id="record-btn">Record</button>
       </div>
       
       <div class="right-content">
-        <div id="records">
-        </div> 
+        <div id="records"></div> 
         
         <div id="last-five-locations" style="display:none;">
           <ul id="location-list"></ul> 
@@ -94,7 +103,7 @@
     </div>
   </div>
 
-
+  <!-- Modal for uploading specimen information -->
   <div id="modal-pop-up-upload" class="modal-pop-up">
     <div class="modal-pop-up-content">
       <span class="modal-pop-up-close">&times;</span>
@@ -122,18 +131,21 @@
     </div>
   </div>
 
+  <!-- Modal for location picker -->
   <div id="location-picker-modal">
     <div id="location-picker-map"></div>
     <button id="location-picker-confirm-button">Confirm Location</button>
   </div>
 
   <div id="loading"></div>
+  <!-- Audio player for bird sounds -->
   <audio id="audio-player" src="birdsong/mixkit-forest-birds-singing-1212.wav"></audio>
 
   </div>
+  <!-- Tenor GIF API -->
   <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 
-
+  <!-- External JavaScript files -->
   <script src="js/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="js/maps-loader.js"></script>
@@ -145,6 +157,7 @@
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   <script src="js/index_bird_content.js"></script>
   <script src="js/setting.js"></script>
+  <!-- Inline script for audio playback -->
   <script>
     function yourVoiceFunction() {
       var audioPlayer = document.getElementById("audio-player");

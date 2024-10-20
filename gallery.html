@@ -5,18 +5,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WingWatch - Bird Gallery</title>
-  <link rel="stylesheet" href="css/styles.css"> <!-- Updated path -->
-  <script src="js/gallery-pop-up.js" defer></script> <!-- Updated path -->
+  <!-- External CSS file -->
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- JavaScript for gallery pop-up functionality -->
+  <script src="js/gallery-pop-up.js" defer></script>
 </head>
 
 <body>
   <div class="container">
+    <!-- Navigation bar -->
     <nav class="navbar">
       <ul class="nav-items">
+        <!-- Home icon -->
         <li><a href="index.html">
             <div class="navicon-wrapper"><img src="picture/bird-icon.png" alt="Bird" style="width: 50px; height: auto;" />
             </div>
           </a></li>
+        <!-- Navigation icons -->
         <div class="nav-grouped-icons">
           <li><a href="index.html"><img src="picture/home-icon.png" alt="Home" />
             <img src="picture/home-icon-on.png" class="navicon" alt="Home" />
@@ -28,17 +33,20 @@
             <img src="picture/gallery-icon-on.png" class="navicon" alt="Gallery" />
           </a></li>
         </div>
+        <!-- Settings icon -->
         <li class="setting"><a href="setting.html"><img src="picture/settings-icon.png" alt="Settings" />
         </a></li>
       </ul>
     </nav>
 
     <div class="all-content">
+      <!-- Top section with title, search bar, and user icon -->
       <div class="top-box">
         <header>
           <h1 style="font-size: 46px; margin-top: -2px; font-family: 'Anuphan', Arial, Helvetica, sans-serif">Gallery</h1>
         </header>
         <div class="top-so">
+          <!-- Search form -->
           <form class="search-bar" action="" onsubmit="return soSubmit(this);">
             <input id="search-input" type="text" name="keys" placeholder="Search" required>
           </form>
@@ -49,9 +57,12 @@
           </a>
         </div>
       </div>
+      <!-- Gallery section -->
       <div class="gallery">
         <div class="list-page">
+          <!-- First page of gallery items -->
           <div class="list">
+            <!-- Gallery items with onclick events to open modal -->
             <div class="picture-item" onclick="openModal('picture/gallery_Red-legged Honeycreeper.png', '<span class=bird-family>Family: Thraupidae</span><br>The Red-legged Honeycreeper is a small, vibrant bird found in Central and South America. Its striking blue and purple feathers make it a standout in tropical forests.', 'Red-legged Honeycreeper')">
               <img src="picture/gallery_Red-legged Honeycreeper.png">
               <p>Red-legged Honeycreeper</p>
@@ -90,6 +101,7 @@
             </div>
           </div>
 
+          <!-- Second page of gallery items (hidden by default) -->
           <div class="list" style="display: none;">
             <div class="picture-item" onclick="openModal('picture/gallery_Western Bluebird.png', 'Western Bluebird  is a relatively large white cockatoo found in wooded habitats in Australia, New Guinea, and some of the islands of Indonesia. They can be locally very numerous, leading to them sometimes being considered pests.', 'Western Bluebird')">
               <img src="picture/gallery_Western Bluebird.png">
@@ -128,6 +140,7 @@
               <p>Blue Kingfisher 2</p>
             </div>
           </div>
+          <!-- Pagination -->
           <div class="page">
             <a href="javascript:;" class="prev"><img src="picture/icon-left.png"></a>
             <a href="javascript:;" class="cur">1</a>
@@ -138,7 +151,7 @@
         </div>
       </div>
 
-      <!--Modal popup box -->
+      <!-- Modal popup box -->
       <div id="modal" class="modal">
         <div class="modal-content" style="width: 800px; border-radius: 30px;">
           <div class="modal-header">
@@ -151,12 +164,15 @@
           <p id="modal-caption"></p>
         </div>
       </div>
+      <!-- Audio player for bird sounds -->
       <audio id="audio-player" src="birdsong/mixkit-forest-birds-singing-1212.wav"></audio>
     </div>
   </div>
-  <script src="js/jquery.min.js"></script> <!-- Updated path -->
-  <script src="js/common.js"></script> <!-- Updated path -->
-  <script src="js/setting.js"></script> <!-- Updated path -->
+  <!-- External JavaScript files -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/setting.js"></script>
+  <!-- Inline script for audio playback -->
   <script>
     function yourVoiceFunction() {
       var audioPlayer = document.getElementById("audio-player");

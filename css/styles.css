@@ -1,9 +1,17 @@
+/*
+ * Main Styles for Bird Watching Application
+ * This stylesheet defines the visual appearance for the entire application.
+ * It includes styles for layout, navigation, content areas, and various components.
+ */
+
+/* Reset and base styles */
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
+/* Custom scrollbar styles */
 ::-webkit-scrollbar {
   width: 10px;
   border-radius: 3px;
@@ -24,6 +32,7 @@
   border-radius: 3px;
 }
 
+/* Base styles for body and html */
 body,
 html {
   height: 100%;
@@ -31,6 +40,7 @@ html {
   background-color: #f0f0f0;
 }
 
+/* Link styles */
 a {
   text-decoration: none;
   color: #000;
@@ -40,13 +50,14 @@ a:hover {
   color: rgb(243, 108, 39);
 }
 
+/* Main container */
 .container {
   display: flex;
   height: 100%;
   width: 100%;
 }
 
-/* Navigation bar */
+/* Navigation bar styles */
 .navbar {
   background-color: #000;
   width: 60px;
@@ -59,7 +70,7 @@ a:hover {
   height: 100%;
 }
 
-/* Items in navigation bar, including logo, and other three main icons */
+/* Navigation items styles */
 .nav-items {
   list-style: none;
   padding: 0;
@@ -68,16 +79,16 @@ a:hover {
   flex-direction: column;
   justify-content: space-around;
   height: 100%;
-  /* Ensures the settings icon can align to the bottom */
 }
 
+/* Individual navigation item styles */
 .nav-items li {
   margin: 10px 0;
-  /* Adjust spacing */
   width: 60px;
   height: 60px;
 }
 
+/* Navigation icon styles */
 .nav-items li img.navicon {
   display: none;
 }
@@ -94,22 +105,20 @@ a:hover {
   display: block;
 }
 
+/* Navigation link styles */
 .nav-items li a {
   display: flex;
   justify-content: center;
-  /* Centers the icon horizontally */
   align-items: center;
-  /* Centers the icon vertically */
   height: 60px;
-  /* Standard height for all icons */
 }
 
 .nav-items li img {
   width: 25px;
-  /* Default width for non-bird icons */
   height: auto;
 }
 
+/* Navigation icon wrapper styles */
 .navicon-wrapper {
   display: flex;
   justify-content: center;
@@ -117,47 +126,38 @@ a:hover {
   width: 60px;
   height: 60px;
   background-color: #ffffff;
-  /* White background */
 }
 
+/* Grouped navigation icons styles */
 .nav-grouped-icons {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Center the icons horizontally within the column */
   flex-grow: 1;
-  /* This will allow the section to expand to fill available space */
   padding: 60px 0;
-  /* Add padding to top and bottom for better spacing */
   margin: 20px 0;
 }
 
-/* Ensure icons within grouped-icons have minimal margin to reduce spacing */
 .nav-grouped-icons li {
   margin: 0 2px;
-  /* Reduced margin to bring icons closer together */
 }
 
-/* .home-icon {
-  background-color: #CCCCCC;
-  /* Light gray background */
-/* } */
-
+/* Settings navigation item styles */
 .nav-setting {
   margin-top: auto;
-  /* Pushes it to the bottom of the navbar */
 }
 
+/* Main content area styles */
 .all-content {
   flex-grow: 1;
   padding: 40px;
   margin-left: 60px;
-  /* Adjusted to align with the navbar width */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* Top box styles */
 .top-box {
   width: 100%;
   display: flex;
@@ -166,6 +166,7 @@ a:hover {
   margin-top: -6px;
 }
 
+/* Top icon styles */
 .top-icon img {
   display: block;
   width: 64px;
@@ -173,6 +174,7 @@ a:hover {
   border-radius: 50%;
 }
 
+/* Header styles */
 header {
   text-align: center;
 }
@@ -190,6 +192,7 @@ header p {
   font-family: Anuphan, Arial, Helvetica, sans-serif;
 }
 
+/* Search bar styles */
 .search-bar {
   display: flex;
   justify-content: center;
@@ -207,6 +210,7 @@ header p {
   font-size: 28px;
 }
 
+/* Autocomplete styles */
 .autocomplete {
   position: relative;
   width: 380px;
@@ -224,7 +228,6 @@ header p {
   overflow-y: auto;
   z-index: 1000;
   display: none;
-  /* Start hidden */
 }
 
 #suggestions-List li {
@@ -237,14 +240,7 @@ header p {
   background-color: #f0f0f0;
 }
 
-/* .search-bar button {
-  padding: 8px 15px;
-  background-color: rgb(243, 108, 39);
-  border: none;
-  color: white;
-  cursor: pointer;
-} */
-
+/* Timeframe buttons styles */
 .timeframe-buttons {
   display: flex;
   justify-content: center;
@@ -274,6 +270,7 @@ header p {
   color: black;
 }
 
+/* Main content area styles */
 main {
   position: relative;
   flex-grow: 1;
@@ -286,6 +283,7 @@ main {
   border-radius: 16px;
 }
 
+/* Map styles */
 #map {
   width: 100%;
   height: 100%;
@@ -304,17 +302,16 @@ main {
   height: auto;
 }
 
+/* Map tips styles */
 .map-tips {
   width: 300px;
   min-height: 200px;
   padding: 10px 15px;
   height: auto;
-  /* border: 1px solid #666; */
   background: #fff;
   border-radius: 16px;
   position: relative;
   padding-bottom: 52px;
-  /* Increased to make room for the button and image */
 }
 
 .tips-title {
@@ -378,6 +375,7 @@ main {
   background-color: rgb(243 194 174);
 }
 
+/* Picture item styles */
 .picture-item {
   cursor: pointer;
   position: relative;
@@ -417,10 +415,12 @@ main {
   font-size: 20px;
   background: rgba(0, 0, 0, 0.6);
 }
-.picture-item:hover p{
+
+.picture-item:hover p {
   display: block;
 }
 
+/* Right info panel styles */
 .right-info {
   display: flex;
   flex-direction: column;
@@ -433,16 +433,13 @@ main {
   height: 410px;
 }
 
+/* Record buttons styles */
 .record-buttons {
   display: flex;
   justify-content: center;
   margin-top: 20px;
   width: auto;
 }
-
-/* .right-info .record-buttons {
-  display: flex;
-} */
 
 .record-buttons button {
   padding: 6px 6px;
@@ -461,12 +458,7 @@ main {
   background-color: rgb(243 194 174);
 }
 
-/* .right-info .record-buttons .button {
-  padding: 18px;
-  font-size: 24px;
-  border-radius: 40px;
-} */
-
+/* Right content styles */
 .right-info .right-content {
   flex: 1;
   margin: 20px 0 0 0;
@@ -485,6 +477,7 @@ main {
   line-height: 26px;
 }
 
+/* Collect button styles */
 .collect-button {
   display: flex;
   justify-content: center;
@@ -508,6 +501,7 @@ main {
   background-color: rgb(243 194 174);
 }
 
+/* Loading indicator styles */
 #loading {
   position: fixed;
   top: 50%;
@@ -526,68 +520,7 @@ main {
   z-index: 1000;
 }
 
-/* .collect {
-  flex-grow: 1;
-  display: flex;
-  width: 100%;
-  margin-top: 30px;
-  min-height: 0;
-  font-size: 20px;
-}
-
-.collect .left-add {
-  width: 30%;
-  background: linear-gradient(to bottom, #ccc, #aaa);
-  border-radius: 32px;
-  overflow: hidden;
-}
-
-.collect .left-add img {
-  max-width: 100%; 
-  max-height: auto; 
-  object-fit: cover; 
-}
-
-.collect .list-page {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.collect .list-page .list {
-  display: flex;
-  flex-wrap: wrap;
-  flex: 1;
-  min-height: 0;
-}
-
-.collect .list-page .list .picture-item {
-  width: 30.3333%;
-  height: 46%;
-  margin-left: 3%;
-  margin-bottom: 30px;
-}
-
-.collect .list-page .page {
-  width: 100%;
-  height: 50px;
-  text-align: center;
-  padding-left: 3%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.collect .list-page .page img {
-  display: block;
-  width: auto;
-  height: 26px;
-}
-
-.collect .list-page .page a,
-.collect .list-page .page span {
-  margin: 0 6px;
-} */
+/* Collect section styles */
 .collect {
   flex-grow: 1;
   display: flex;
@@ -645,7 +578,8 @@ main {
   align-items: center;
   justify-content: space-between;
 }
-.collect .list-page .list .picture-item.ball img{
+
+.collect .list-page .list .picture-item.ball img {
   object-fit: contain;
 }
 
@@ -734,12 +668,11 @@ main {
   margin: 0 6px;
 }
 
-
-
 /* Gallery page styling */
 .gallery * {
   box-sizing: border-box;
 }
+
 .gallery .list-page {
   padding: 10px 15%;
 }
@@ -795,7 +728,7 @@ main {
   color: black;
 }
 
-/* The Modal (background) */
+/* Modal styles */
 .modal {
   display: none;
   position: fixed;
@@ -810,7 +743,6 @@ main {
   align-items: center;
 }
 
-/* Modal Content */
 .modal-content {
   background-color: #fefefe;
   padding: 20px;
@@ -833,6 +765,7 @@ main {
   line-height: 1.1;
   text-align: justify;
 }
+
 .bird-family {
   font-size: 22px; 
   font-weight: bold; 
@@ -840,7 +773,6 @@ main {
   display: block; 
 }
 
-/* The Close Button */
 .close {
   color: #7b7a7afa;
   font-size: 36px;
@@ -855,7 +787,6 @@ main {
   cursor: pointer;
 }
 
-/* The Voice icon */
 .modal-header {
   display: flex;
   justify-content: space-between;
@@ -871,7 +802,6 @@ main {
   cursor: pointer;
 }
 
-/* The bird-name */
 .bird-name {
   margin: 0 10px;
   font-size: 30px;
@@ -880,8 +810,6 @@ main {
   flex-grow: 1;
   display: inline-block;
 }
-
-
 
 /* Dark Mode Styling */
 .dark-mode {
@@ -926,6 +854,7 @@ main {
   color: #f1f1f1;
 }
 
+/* Slider box styles */
 .slider-box {
   display: flex;
   align-items: center;
@@ -952,6 +881,7 @@ main {
   color: rgb(243, 108, 39);
 }
 
+/* Location list styles */
 #location-list li {
   cursor: pointer;
   color: navy;
@@ -964,9 +894,10 @@ main {
 }
 
 #location-list li:active {
-  color: red; /* 点击时的颜色变化 */
+  color: red;
 }
 
+/* Add specimen button styles */
 .add-specimen-btn {
     position: fixed;
     bottom: 20px;
@@ -986,6 +917,7 @@ main {
     background-color: rgb(243, 194, 174);
 }
 
+/* Modal pop-up styles */
 .modal-pop-up {
     display: none;
     position: fixed;
@@ -1023,8 +955,7 @@ main {
     cursor: pointer;
 }
 
-/* Add styles for form elements if needed */
-
+/* Bird location map styles */
 #bird-location-map {
   width: 100%;
   height: 200px;
@@ -1033,9 +964,8 @@ main {
 
 .bird-map-container {
   width: 100%;
-  height: 30vh; /* 30% of the viewport height */
-  min-height: 200px; /* Ensures a minimum height on smaller screens */
+  height: 30vh;
+  min-height: 200px;
   margin-top: 10px;
   margin-bottom: 10px;
 }
-

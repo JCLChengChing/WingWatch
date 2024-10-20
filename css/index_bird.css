@@ -1,3 +1,15 @@
+/* 
+ * Bird Sighting Application Styles
+ * This stylesheet defines the visual appearance for the bird sighting application.
+ * It includes styles for the main content areas, records display, location list,
+ * buttons, and modal pop-ups.
+ *
+ * Reference:
+ * W3C. (n.d.). Web Style Sheets CSS tips & tricks. 
+ * Retrieved from https://www.w3.org/Style/Examples/007/units.en.html
+ */
+
+/* Right content area styling */
 .right-content {
   padding: 10px;
   background-color: #f9f9f9;
@@ -5,6 +17,7 @@
   border-radius: 5px;
 }
 
+/* Records section styling */
 #records h2 {
   color: black;
   font-size: 1.2em;
@@ -18,6 +31,7 @@
   border-bottom: 1px solid #eee;
 }
 
+/* Last five locations section styling */
 #last-five-locations {
   background-color: #fafafa;
   padding: 10px;
@@ -30,6 +44,7 @@
   font-size: 1.4em;
 }
 
+/* Location list styling */
 #location-list {
   list-style-type: none;
   padding: 0;
@@ -44,25 +59,30 @@
   color: black !important; /* Force black color and override any other styles */
 }
 
+/* Zebra striping for location list */
 #location-list li:nth-child(even) {
   background-color: #f8f8f8;
 }
 
+/* Hover effect for location list items */
 #location-list li:hover {
   background-color: rgb(243, 194, 174); /* Light orange */
   color: black !important; /* Ensure text stays black on hover */
 }
 
+/* Active state for location list items */
 #location-list li:active {
   background-color: rgb(243, 108, 39); /* Darker orange for click effect */
   color: black !important; 
 }
 
+/* Active button styling */
 button.active {
   background-color: #4CAF50; /* Green */
   color: white;
 }
 
+/* General button styling */
 button {
   padding: 10px 20px;
   border: none;
@@ -72,10 +92,12 @@ button {
   color: black;
 }
 
+/* Hover effect for buttons */
 button:hover {
   background-color: rgb(243, 194, 174); /* Light orange */
 }
 
+/* Specific button styling */
 #last-seen-btn, #record-btn {
   transition: background-color 0.3s;
 }
@@ -84,25 +106,26 @@ button:hover {
   background-color: rgb(243, 194, 174); /* Light orange */
 }
 
+/* Modal pop-up styling */
 .modal-pop-up {
-  display: none;
+  display: none; /* Hidden by default */
   position: fixed;
-  z-index: 1;
+  z-index: 1; /* Sit on top */
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
 .modal-pop-up-content {
   background-color: #fefefe;
-  margin: 15% auto;
+  margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 80%; /* Could be more or less, depending on screen size */
 }
 
 .modal-pop-up-close {

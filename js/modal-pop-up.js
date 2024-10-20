@@ -1,11 +1,18 @@
+/**
+ * Modal Pop-up Module
+ * This module handles the functionality for the modal pop-up used for uploading bird sightings.
+ */
+
 document.addEventListener('DOMContentLoaded', function() {
-  // Get the modal
+  // Get the modal element
   var modal = document.getElementById("modal-pop-up-upload");
   
   // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("modal-pop-up-close")[0];
   
-  // Function to open the modal
+  /**
+   * Opens the modal and focuses on the first input field
+   */
   function openModal() {
     modal.style.display = "block";
     // Focus the first input field in the modal
@@ -27,7 +34,10 @@ document.addEventListener('DOMContentLoaded', function() {
   // Make openModal function globally accessible
   window.openModal = openModal;
   
-  // Function to open map modal (you'll need to implement this)
+  /**
+   * Opens the map modal (placeholder function)
+   * TODO: Implement actual map modal functionality
+   */
   window.openMapModal = function() {
       // Implement map modal functionality here
       console.log("Opening map modal");
@@ -39,6 +49,10 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+/**
+ * Event listener for image upload
+ * Updates the displayed file name when an image is selected
+ */
 document.getElementById('modal-pop-up-image-upload').addEventListener('change', function(event) {
   var file = event.target.files[0];
   document.getElementById('modal-pop-up-image-name').innerHTML = file.name;

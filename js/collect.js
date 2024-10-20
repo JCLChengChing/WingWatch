@@ -1,9 +1,15 @@
 $(function(){
-    // Map handler object
+    /**
+     * Map handler object
+     * Manages the Leaflet map for displaying bird locations
+     */
     const MapHandler = {
       map: null,
       currentMarker: null,
 
+      /**
+       * Initializes the Leaflet map
+       */
       initMap: function() {
         if (!this.map) {
           this.map = L.map('bird-location-map').setView([0, 0], 2);
@@ -13,6 +19,11 @@ $(function(){
         }
       },
 
+      /**
+       * Displays a marker on the map at the given coordinates
+       * @param {number} lat - Latitude
+       * @param {number} lon - Longitude
+       */
       showOnMap: function(lat, lon) {
         if (!this.map) {
           this.initMap();
@@ -33,6 +44,9 @@ $(function(){
       }
     };
 
+    /**
+     * Initializes the bird location map
+     */
     function initBirdLocationMap() {
       if (MapHandler.map) {
         MapHandler.map.remove();
@@ -40,6 +54,15 @@ $(function(){
       MapHandler.initMap();
     }
 
+    /**
+     * Displays bird information and location on the map
+     * @param {string} imagePath - Path to the bird image
+     * @param {string} location - Location description
+     * @param {string} species - Bird species
+     * @param {string} time - Time of sighting
+     * @param {number} lat - Latitude
+     * @param {number} lon - Longitude
+     */
     function showInfo(imagePath, location, species, time, lat, lon) {
       // Format the time to remove 'T'
       const formattedTime = time.replace('T', ' ');
@@ -63,12 +86,16 @@ $(function(){
       }, 100);
     }
 
+    /**
+     * Hides the bird information panel
+     */
     function hideInfo() {
       $('.list-page .info').hide();
       $('.list-page .list').fadeIn();
       $('.list-page .page').fadeIn();
     }
 
+    // Attach click event to hide info
     $('.list-page .desc .head .back').click(hideInfo);
 
     // Initialize the map when the page loads
@@ -76,7 +103,7 @@ $(function(){
 
     const listDiv = $('.list');
 
-    // Add the "add" item at the beginning
+    // Add the "add" item at the beginning of the list
     const addItem = $('<div>').addClass('picture-item add');
     addItem.append($('<span>').text('+'));
     addItem.click(function() {
@@ -84,6 +111,7 @@ $(function(){
     });
     listDiv.append(addItem);
 
+    // Fetch and process bird data
     fetch('data.txt')
       .then(response => response.text())
       .then(data => {
@@ -101,6 +129,7 @@ $(function(){
           let lat = 0;
           let lon = 0;
 
+          // Parse each line of the record
           lines.forEach(line => {
             if (line.startsWith('Entry ID:')) {
               entryId = line.replace('Entry ID:', '').trim();
@@ -121,6 +150,7 @@ $(function(){
             }
           });
 
+          // Create and append the bird item to the list
           const itemDiv = $('<div>').addClass('picture-item').attr('data-entry-id', entryId);
           itemDiv.addClass('ball');
 
@@ -145,20 +175,22 @@ $(function(){
       });
 });
 
-// Function to open the modal
+/**
+ * Opens the modal for uploading new bird sightings
+ */
 function openModal() {
     $('#modal-pop-up-upload').css('display', 'block');
 }
 
-// Function to close the modal
+/**
+ * Closes the modal for uploading new bird sightings
+ */
 function closeModal() {
     $('#modal-pop-up-upload').css('display', 'none');
 }
 
-// Add click event listener for the "+" button (assuming you have one)
+// Event listeners for modal interactions
 $('.add').click(openModal);
-
-// Close the modal when clicking the close button
 $('.modal-pop-up-close').click(closeModal);
 
 // Close the modal when clicking outside of it
@@ -168,15 +200,15 @@ $(window).click(function(event) {
     }
 });
 
-// Add click event listener for the new button
+// Additional event listeners for modal interactions
 $('#open-modal-btn').click(openModal);
-
-// Handle closing the modal
 $('.modal-pop-up-close').click(function() {
     $('#modal-pop-up-upload').hide();
 });
 
-// Add this function to handle file selection inside the modal
+/**
+ * Handles file selection inside the modal
+ */
 $('#modal-pop-up-image-upload').change(function(event) {
     var file = event.target.files[0];
     $('#modal-pop-up-image-name').text(file.name);
