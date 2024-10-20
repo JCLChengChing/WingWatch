@@ -168,7 +168,10 @@ function processAllOccurrences(occurrences, map, centralLocation) {
       }
     }
   }
-
+  console.log("Occurrences with distances:");
+  selectedOccurrences.forEach(occurrence => {
+    console.log(`Species: ${occurrence.species}, Distance: ${occurrence.distance.toFixed(2)} km`);
+  });
   console.log("Distinct species to be displayed:", selectedOccurrences.length);
   console.log("Occurrences:", selectedOccurrences);
 
@@ -203,6 +206,10 @@ function processOccurrences(data, map) {
     'picture/image5.png'
   ];
 
+ // Determine which image to use
+ const useSearchIcon = currentSearchTerm !== '';
+ const iconUrl = useSearchIcon ? 'picture/image3.png' : null;
+
   $.each(data.occurrences, function (index, occurrence) {
     var scientificName = occurrence.scientificName;
     var species = occurrence.species;
@@ -215,7 +222,7 @@ function processOccurrences(data, map) {
     if (species && lat && lon) {
       console.log(`Creating marker for ${commonName || species} at ${lat}, ${lon}`);
 
-      var birdImageUrl = birdImages[index % birdImages.length];
+      var birdImageUrl = useSearchIcon ? iconUrl : birdImages[index % birdImages.length];
 
       var marker = new google.maps.Marker({
         position: {
@@ -260,43 +267,20 @@ function processOccurrences(data, map) {
       });
 
       marker.addListener('click', function () {
-        if (currentInfoWindow === infoWindow && infoWindow.getMap()) {
-          infoWindow.close();
-          $('.right-info').hide();
-          currentInfoWindow = null;
-        } else {
-          if (currentInfoWindow) {
-            currentInfoWindow.close();
-          }
-          infoWindow.open(map, marker);
-          currentInfoWindow = infoWindow;
-          $('.right-info').show();
+        if (currentInfoWindow) {
+          currentInfoWindow.close();
         }
+        infoWindow.open(map, marker);
+        currentInfoWindow = infoWindow;
+        $('.right-info').show();
       });
     }
   });
 
   console.log("Total markers created:", globalMarkers.length);
 
-  // Clear previous records
-  $("#records").empty();
-
-  // Add new records
-  data.occurrences.forEach(occurrence => {
-    var commonName = occurrence.vernacularName || occurrence.species;
-    var scientificName = occurrence.scientificName;
-    var location = (occurrence.stateProvince || '') + ", " + (occurrence.country || '');
-    var eventDate = occurrence.eventDate ? new Date(occurrence.eventDate).toLocaleDateString() : 'Unknown Date';
-
-    $("#records").append(
-      $('<section class="record map-item">').append(
-        $('<h2>').text(commonName + (scientificName ? ` (${scientificName})` : '')),
-        $('<h3>').text(location),
-        $('<p>').text("Species: " + occurrence.species),
-        $('<p>').text("Observed on: " + eventDate)
-      )
-    );
-  });
+  // Update the sidebar
+  updateSidebar(data.occurrences);
 }
 
 
@@ -356,7 +340,11 @@ function getCurrentMapCenter() {
 function setTimeframe(timeframe) {
   currentTimeframe = timeframe;
   updateTimeframeUI();
-  fetchOccurrences(map, getCurrentMapCenter(), 5);
+  if (currentSearchTerm) {
+    searchBirds(currentSearchTerm); 
+} else {
+    fetchOccurrences(map, getCurrentMapCenter(), 5);
+}
 }
 
 function updateTimeframeUI() {
@@ -372,28 +360,6 @@ $(document).ready(function () {
 });
 
 
-
-
-// function handleMapDrag(map) {
-//   google.maps.event.addListener(map, 'dragend', function() {
-//       showLoading(); // Show loading overlay immediately when map is dragged
-
-//       var center = map.getCenter();
-//       var centralLocation = {
-//           lat: center.lat(),
-//           lng: center.lng()
-//       };
-
-//       var radius = 5; // 5 km radius
-
-//       fetchOccurrences(map, centralLocation, radius);
-//   });
-// }
-
-
-
-
-
 function handleMapDrag(map) {
   google.maps.event.addListener(map, 'dragend', function () {
     var bounds = map.getBounds();
@@ -402,15 +368,17 @@ function handleMapDrag(map) {
       lat: center.lat(),
       lng: center.lng()
     };
-    // Estimate the radius based on the map's zoom level
-    var zoom = map.getZoom();
-    var radius = 40000 / Math.pow(2, zoom); // Rough estimate in km
+    // Store the current zoom level
+    var currentZoom = map.getZoom();
+    var radius = 40000 / Math.pow(2, currentZoom); // Rough estimate in km
 
     if (currentSearchTerm) {
       searchBirds(currentSearchTerm);
     } else {
       fetchOccurrences(map, centralLocation, radius);
     }
+    // Ensure the zoom level doesn't change
+    map.setZoom(currentZoom);
   });
 }
 
@@ -503,8 +471,8 @@ function searchBirds(searchTerm) {
   currentSearchTerm = searchTerm;
   showLoading();
   const centralLocation = getCurrentMapCenter();
-  const zoom = map.getZoom();
-  const radius = 40000 / Math.pow(2, zoom); // Use the same radius calculation as in handleMapDrag
+  const currentZoom = map.getZoom(); // Store the current zoom
+  const radius = 40000 / Math.pow(2, currentZoom);
 
   const dateRange = getDateRange(currentTimeframe);
   const lowerSearchTerm = searchTerm.toLowerCase();
@@ -536,6 +504,7 @@ function searchBirds(searchTerm) {
       });
       response.occurrences = filteredOccurrences;
       processSearchResults(response, map);
+      map.setZoom(currentZoom); // Ensure zoom level doesn't change
       hideLoading();
     },
     error: function (xhr, status, error) {
@@ -628,15 +597,7 @@ function processSearchResults(data, map) {
     console.log("Occurrences:", selectedOccurrences);
 
     // Process and display the occurrences
-    processOccurrences1({
-      occurrences: selectedOccurrences
-    }, map);
-
-    // Fit the map to show all markers
-    const bounds = new google.maps.LatLngBounds();
-    globalMarkers.forEach(marker => bounds.extend(marker.getPosition()));
-    map.fitBounds(bounds);
-
+    processOccurrences({ occurrences: selectedOccurrences }, map);
     // Update the sidebar
     updateSidebar(selectedOccurrences);
   } else {
@@ -668,113 +629,6 @@ function updateSidebar(occurrences) {
 
   $("#records").html(recordsHtml);
 }
-
-// function clearSearch() {
-//   currentSearchTerm = '';
-//   $('#search-input').val(''); // Clear the search input field
-//   updateTimeframeUI(); // Reset the timeframe UI
-
-//   $('#clear-search-btn').on('click', function(e) {
-//     e.preventDefault();
-//     clearSearch();
-//   }); 
-//   const center = getCurrentMapCenter();
-//   const zoom = map.getZoom();
-//   const radius = 40000 / Math.pow(2, zoom); // Use the same radius calculation as in handleMapDrag
-//   fetchOccurrences(map, center, radius);
-// }
-
-
-
-
-function processOccurrences1(data, map) {
-  console.log("Processing occurrences:", data.occurrences.length);
-
-  let currentInfoWindow = null;
-
-  // Clear existing markers
-  globalMarkers.forEach(marker => marker.setMap(null));
-  globalMarkers = [];
-
-  // Array of bird image URLs
-  const birdImages = [
-    'picture/image3.png',
-  ];
-
-  $.each(data.occurrences, function (index, occurrence) {
-    var scientificName = occurrence.scientificName;
-    var species = occurrence.species;
-    var commonName = occurrence.vernacularName || species;
-    var location = (occurrence.stateProvince || '') + ", " + (occurrence.country || '');
-    var eventDate = occurrence.eventDate ? new Date(occurrence.eventDate).toLocaleDateString() : 'Unknown Date';
-    var lat = occurrence.decimalLatitude;
-    var lon = occurrence.decimalLongitude;
-
-    if (species && lat && lon) {
-      console.log(`Creating marker for ${commonName || species} at ${lat}, ${lon}`);
-
-      var birdImageUrl = birdImages[index % birdImages.length];
-
-      var marker = new google.maps.Marker({
-        position: {
-          lat: parseFloat(lat),
-          lng: parseFloat(lon)
-        },
-        map: map,
-        title: scientificName || species,
-        icon: {
-          url: birdImageUrl,
-          scaledSize: new google.maps.Size(54, 64)
-        }
-      });
-
-      globalMarkers.push(marker);
-
-      var infoWindowContent = `
-        <div class="map-tips">
-            <div class="tips-title">
-                <h2>${commonName || species}</h2>
-                <a href="https://www.google.com/maps?q=${lat},${lon}" target="_blank" class="tips-msg">
-                    <span class="google-maps-link">Google Maps</span>
-                </a>
-            </div>
-            <div class="tips-content">
-                <h3>${location}</h3>
-                <p>Species: ${species}</p>
-                <p>Scientific Name: ${scientificName || 'N/A'}</p>
-                <p>Observed on: ${eventDate}</p>
-            </div>
-            <div class="tips-footer">
-                <button class="more-btn">More</button>
-                <div class="tips-image">
-                    <img src="picture/icon-msg.png" alt="Bird Location" width="32" height="32">
-                </div>
-            </div>            
-        </div>
-      `;
-
-      var infoWindow = new google.maps.InfoWindow({
-        content: infoWindowContent
-      });
-
-      marker.addListener('click', function () {
-        if (currentInfoWindow === infoWindow && infoWindow.getMap()) {
-          infoWindow.close();
-          $('.right-info').hide();
-          currentInfoWindow = null;
-        } else {
-          if (currentInfoWindow) {
-            currentInfoWindow.close();
-          }
-          infoWindow.open(map, marker);
-          currentInfoWindow = infoWindow;
-          $('.right-info').show();
-        }
-      });
-    }
-  })
-};
-
 
 function autoScroll(obj) {
   $(obj).find('span').animate({
