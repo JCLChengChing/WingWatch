@@ -4,8 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Setting</title>
+  <title>WingWatch - Bird Gallery</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="setting.css"> 
 </head>
 
 <body>
@@ -13,21 +14,63 @@
     <nav class="navbar">
       <ul class="nav-items">
         <li><a href="index.html">
-            <div class="icon-wrapper"><img src="picture/bird-icon.png" alt="Bird" style="width: 50px; height: auto;" />
+            <div class="navicon-wrapper"><img src="picture/bird-icon.png" alt="Bird" style="width: 50px; height: auto;" />
             </div>
           </a></li>
-        <div class="grouped-icons">
-          <li><a href="index.html"><img src="picture/home-icon.png" alt="Home" /><img src="picture/home-icon-on.png" class="on" alt="Home" /></a></li>
-          <li><a href="collect.html"><img src="picture/eye-icon.png" alt="View" style="width: 32px; height: 32px;"/><img src="picture/eye-icon-on.png" class="on" alt="View" /></a></li>
-          <li><a href="gallery.html"><img src="picture/gallery-icon.png" alt="Gallery" /><img src="picture/gallery-icon-on.png" class="on" alt="Gallery" /></a></li>
+        <div class="nav-grouped-icons">
+          <li><a href="index.html"><img src="picture/home-icon.png" alt="Home" />
+            <img src="picture/home-icon-on.png" class="navicon" alt="Home" /></a></li>
+          <li><a href="collect.html"><img src="picture/eye-icon.png" alt="View" style="width: 32px; height: 32px;"/>
+            <img src="picture/eye-icon-on.png" class="navicon" alt="View" /></a></li>
+          <li><a href="gallery.html"><img src="picture/gallery-icon.png" alt="Gallery" />
+            <img src="picture/gallery-icon-on.png" class="navicon" alt="Gallery" /></a></li>
         </div>
-        <li class="settings on"><a href="setting.html"><img src="picture/settings-icon.png" alt="Settings" /><img src="picture/settings-icon-on.png" class="on" alt="Settings" /></a></li>
+        <li class="setting navicon"><a href="setting.html"><img src="picture/settings-icon.png" alt="Settings" />
+          <img src="picture/settings-icon-on.png" class="navicon" alt="Gallery" /></a></li>
       </ul>
     </nav>
-    <div class="content">
 
+    <div class="all-content">
+      <div class="top-box">
+        <header>
+          <h1 style="font-size: 46px; margin-top: -2px; font-family: 'Anuphan', Arial, Helvetica, sans-serif">Setting</h1>
+        </header>
+        
+        <div class="top-icon">
+          <a href="#">
+            <img src="picture/user_account.png">
+          </a>
+        </div>
+      </div>
+      <div class="setings">
+      </div>
+    <!-- Settings Section -->
+    <div class="setings">
+
+      <!-- Language Section -->
+      <div class="settings-section">
+        <h2>Language</h2>
+        <p>Manage the language of your Google Search display, and select preferences for your results</p>
+        <div class="settings-option">
+          <span><img src="picture/language-icon.png" alt="Language"> Language and region</span>
+          <span>&gt;</span>
+        </div>
+      </div>
+
+      <!-- Desktop Section -->
+      <div class="settings-section">
+        <h2>Desktop</h2>
+        <p>Customize how Google Search looks and functions on your devices</p>
+        <div class="settings-option">
+          <span><img src="picture/dark-theme-icon.png" alt="Dark Theme"> Dark theme</span>
+          <span class="toggle">Off</span>
+        </div>
+      </div> 
     </div>
   </div>
+  <script src="jquery.min.js"></script>
+  <script src="common.js"></script>
+  <script src="setting.js"></script>
 </body>
 
 </html>

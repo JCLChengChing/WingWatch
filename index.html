@@ -4,9 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WingWatch</title>
+  <title>WingWatch - Homepage</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="modal-pop-up.css">
+  <link rel="stylesheet" href="index_bird.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 
 </head>
@@ -16,14 +17,16 @@
     <nav class="navbar">
       <ul class="nav-items">
         <li><a href="index.html">
-            <div class="navicon-wrapper"><img src="picture/bird-icon.png" alt="Bird" style="width: 50px; height: auto;" />
+            <div class="navicon-wrapper"><img src="picture/bird-icon.png" alt="Bird"
+                style="width: 50px; height: auto;" />
             </div>
           </a></li>
         <div class="nav-grouped-icons">
           <li class="navicon"><a href="index.html"><img src="picture/home-icon.png" alt="Home" /><img
                 src="picture/home-icon-on.png" class="navicon" alt="Home" /></a></li>
-          <li><a href="collect.html"><img src="picture/eye-icon.png" alt="View" style="width: 32px; height: 32px;" /><img src="picture/eye-icon-on.png"
-                class="navicon" alt="View" /></a></li>
+          <li><a href="collect.html"><img src="picture/eye-icon.png" alt="View"
+                style="width: 32px; height: 32px;" /><img src="picture/eye-icon-on.png" class="navicon"
+                alt="View" /></a></li>
           <li><a href="gallery.html"><img src="picture/gallery-icon.png" alt="Gallery" /><img
                 src="picture/gallery-icon-on.png" class="navicon" alt="Gallery" /></a></li>
         </div>
@@ -34,11 +37,25 @@
       <div class="top-box">
         <header>
           <h1>WingWatch</h1>
-          <p>Birdwatching Made Effortless</p>
+          <p class="slider-box">
+            <span>Discover the</span>
+            <span class="slider-up">
+              <span style="margin-top:0!important">
+                <em>Wonder</em>
+                <em>Beauty</em>
+                <em>Magic</em>
+              </span>
+            </span>
+            <span>of birdwatching with WingWatch</span>
+          </p>
         </header>
         <div>
           <form class="search-bar" action="" onsubmit="return soSubmit(this);">
-            <input id="search-input" type="text" name="keys" placeholder="Search" required>
+            <div class="autocomplete">
+              <input id="search-input" type="text" name="keys" placeholder="Search" required>
+              <ul id="suggestions-List" class="suggestions-list"></ul>
+            </div>
+
           </form>
           <div class="timeframe-buttons">
             <button id="week-btn">2 Weeks</button>
@@ -50,28 +67,30 @@
       <main>
         <div id="map"></div>
         <div class="map-fixed">
-          
+
         </div>
       </main>
     </div>
     <div class="right-info" style="display: none;">
       <div class="picture-item">
-        <img src="picture/bird-picture.png">
+        <img src="picture/ibis-info-img.png">
       </div>
       <div class="record-buttons">
-        <button style="background-color: rgb(243 194 174);">Last seen</button>
-        <button>Record</button>
+        <button id="last-seen-btn" style="background-color: rgb(243 194 174);">Last seen</button>
+        <button id="record-btn">Record</button>
       </div>
+      
       <div class="right-content">
-        <h2>No Record</h2>
-        <p>-------------------------------------------------------------------</p>
-        <p>-------------------------------------------------------------------</p>
-        <p>-------------------------------------------------------------------</p>
-        <p>-------------------------------------------------------------------</p>
-        <p>-------------------------------------------------------------------</p>
-        <p>-------------------------------------------------------------------</p>
+        <div id="records">
+        </div> <!-- 显示记录信息 -->
         
+        <div id="last-five-locations" style="display:none;">
+          <h2>Last seen</h2>
+          <ul id="location-list"></ul> <!-- 显示最后5个发现地点 -->
+        </div>
       </div>
+
+      
       <div class="collect-button">
         <button onclick="openModal()">Collect</button>
       </div>
@@ -79,27 +98,36 @@
   </div>
 
 
-    <div id="modal-pop-up-upload" class="modal-pop-up">
-      <div class="modal-pop-up-content">
-          <span class="modal-pop-up-close">&times;</span>
-          <h2>Upload Specimen Information</h2>
-          <form id="modal-pop-up-specimen-form">
-              <div class="modal-pop-up-form-group">
-                  <input type="file" id="modal-pop-up-image-upload" accept="image/*" required>
-              </div>
-              <div class="modal-pop-up-form-group">
-                  <input type="text" id="modal-pop-up-location" placeholder="Location" readonly>
-                  <button type="button" onclick="openLocationPickerModal()">Select Location</button>
-              </div>
-              <div class="modal-pop-up-form-group">
-                  <input type="text" id="modal-pop-up-species" placeholder="Species" required>
-              </div>
-              <div class="modal-pop-up-form-group">
-                  <input type="datetime-local" id="modal-pop-up-time" required>
-              </div>
-              <button type="submit" class="modal-pop-up-submit">Submit</button>
-          </form>
-      </div>
+  <div id="modal-pop-up-upload" class="modal-pop-up">
+    <div class="modal-pop-up-content">
+      <span class="modal-pop-up-close">&times;</span>
+      <h2>Upload Specimen Information</h2>
+      <form id="modal-pop-up-specimen-form" action = "submit_data.php" method ="POST" enctype ="multipart/form-data">
+        <div class="modal-file">
+          <div class="icon">+</div>
+          <div class="file" id="modal-pop-up-image-name"></div>
+          <input type="file" id="modal-pop-up-image-upload" name = "image" accept="image/*" required>
+        </div>
+        <div class="modal-pop-up-form-group">
+          <input type="text" id="modal-pop-up-location" name = "location" placeholder="Location" readonly>
+          <button type="button" onclick="openLocationPickerModal()">Select Location</button>
+        </div>
+        <div class="modal-pop-up-form-group">
+          <input type="text" id="modal-pop-up-species" name = "species" placeholder="Species" required>
+        </div>
+        <div class="modal-pop-up-form-group">
+          <input type="datetime-local"  name = "time" id="modal-pop-up-time" required>
+        </div>
+        <!-- <button type="submit" class="modal-pop-up-submit">Submit</button> -->
+        <button type="submit" class="modal-pop-up-submit" style="margin-top: 10px; padding: 12px 24px; background-color: rgb(243, 108, 39); color: white; border: none; cursor: pointer; border-radius: 25px; font-size: 16px; font-weight: bold; transition: all 0.3s ease;">
+          Submitionono
+      </button>
+      
+        <!-- <a href="./collect.html"
+          style="margin-top: 10px; padding: 12px 24px; background-color: rgb(243, 108, 39); color: white; border: none; cursor: pointer; border-radius: 25px; font-size: 16px; font-weight: bold; transition: all 0.3s ease;">Submit</a> -->
+
+      </form>
+    </div>
   </div>
 
   <div id="location-picker-modal">
@@ -107,14 +135,24 @@
     <button id="location-picker-confirm-button">Confirm Location</button>
   </div>
 
-  <div id="loading" style="display: none;">Loading...</div>
+  <div id="loading"></div>
+
+
+  </div>
+  <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+
 
   <script src="jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="maps-loader.js"></script>
   <script src="index.js"></script>
+  <script src="search.js"></script>
   <script src="common.js"></script>
   <script src="modal-pop-up.js"></script>
   <script src="location-picker.js"></script>
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="index_bird_content.js"></script>
+  <script src="setting.js"></script>
 </body>
+
 </html>

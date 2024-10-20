@@ -4,8 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bird Gallery</title>
+  <title>WingWatch - Bird Gallery</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="gallery-pop-up.js" defer></script>
 </head>
 
 <body>
@@ -13,25 +14,29 @@
     <nav class="navbar">
       <ul class="nav-items">
         <li><a href="index.html">
-            <div class="icon-wrapper"><img src="picture/bird-icon.png" alt="Bird" style="width: 50px; height: auto;" />
+            <div class="navicon-wrapper"><img src="picture/bird-icon.png" alt="Bird" style="width: 50px; height: auto;" />
             </div>
           </a></li>
-        <div class="grouped-icons">
+        <div class="nav-grouped-icons">
           <li><a href="index.html"><img src="picture/home-icon.png" alt="Home" />
-            <img src="picture/home-icon-on.png" class="on" alt="Home" /></a></li>
-          <li><a href="collect.html"><img src="picture/eye-icon.png" alt="View" />
-            <img src="picture/eye-icon-on.png" class="on" alt="View" /></a></li>
-          <li class="on"><a href="gallery.html"><img src="picture/gallery-icon.png" alt="Gallery" />
-            <img src="picture/gallery-icon-on.png" class="on" alt="Gallery" /></a></li>
+            <img src="picture/home-icon-on.png" class="navicon" alt="Home" />
+          </a></li>
+          <li><a href="collect.html"><img src="picture/eye-icon.png" alt="View" style="width: 32px; height: 32px;"/>
+            <img src="picture/eye-icon-on.png" class="navicon" alt="View" />
+          </a></li>
+          <li class="navicon"><a href="gallery.html"><img src="picture/gallery-icon.png" alt="Gallery" />
+            <img src="picture/gallery-icon-on.png" class="navicon" alt="Gallery" />
+          </a></li>
         </div>
-        <li class="settings"><a href="setting.html"><img src="picture/settings-icon.png" alt="Settings" /></a></li>
+        <li class="setting"><a href="setting.html"><img src="picture/settings-icon.png" alt="Settings" />
+        </a></li>
       </ul>
     </nav>
 
-    <div class="content">
+    <div class="all-content">
       <div class="top-box">
         <header>
-          <h1 style="font-size: 56px; font-family: 'Anuphan'">BirdGallery</h1>
+          <h1 style="font-size: 46px; margin-top: -2px; font-family: 'Anuphan', Arial, Helvetica, sans-serif">Gallery</h1>
         </header>
         <div class="top-so">
           <form class="search-bar" action="" onsubmit="return soSubmit(this);">
@@ -47,71 +52,111 @@
       <div class="gallery">
         <div class="list-page">
           <div class="list">
-            <div class="picture-item">
-              <img src="picture/gallery_1.png">
-              <p>Cedar Waxwing</p>
-            </div>
-            <div class="picture-item">
-              <img src="picture/gallery_2.png">
-              <p>Western Bluebird</p>
-            </div>
-            <div class="picture-item">
-              <img src="picture/gallery_3.png">
-              <p>Blue Kingfisher</p>
-            </div>
-            <div class="picture-item">
-              <img src="picture/gallery_4.png">
-              <p>Songbird</p>
-            </div>
-            <div class="picture-item">
-              <img src="picture/gallery_5.png">
-              <p>Lilac-breasted Roller</p>
-            </div>
-            <div class="picture-item">
-              <img src="picture/gallery_6.png">
+            <div class="picture-item" onclick="openModal('picture/gallery_Red-legged Honeycreeper.png', '<span class=bird-family>Family: Thraupidae</span><br>The Red-legged Honeycreeper is a small, vibrant bird found in Central and South America. Its striking blue and purple feathers make it a standout in tropical forests.', 'Red-legged Honeycreeper')">
+              <img src="picture/gallery_Red-legged Honeycreeper.png">
               <p>Red-legged Honeycreeper</p>
             </div>
-            <div class="picture-item">
-              <img src="picture/gallery_7.png">
-              <p>Parus Caeruleus</p>
-            </div>
-            <div class="picture-item">
-              <img src="picture/gallery_8.png">
+            <div class="picture-item" onclick="openModal('picture/gallery_Sulphur-crested Cockatoo.png', '<span class=bird-family>Family: Cacatuidae</span><br>The Sulphur-crested Cockatoo is a large, white parrot with a distinctive yellow crest. Native to Australia, it is highly intelligent and known for its loud, social nature.', 'Sulphur-crested Cockatoo')">
+              <img src="picture/gallery_Sulphur-crested Cockatoo.png">
               <p>Sulphur-crested Cockatoo</p>
             </div>
-            <div class="picture-item">
-              <img src="picture/gallery_9.png">
+            <div class="picture-item" onclick="openModal('picture/gallery_Parus Caeruleus.png', '<span class=bird-family>Family: Paridae</span><br>The Blue Tit is a small, colorful bird commonly found across Europe. Its bright blue and yellow feathers make it easily recognizable in gardens and woodlands.', 'Parus Caeruleus')">
+              <img src="picture/gallery_Parus Caeruleus.png">
+              <p>Parus Caeruleus</p>
+            </div>
+            <div class="picture-item" onclick="openModal('picture/gallery_Rollers Troupant Bird.png', '<span class=bird-family>Family: Coraciidae</span><br>The Rollers Troupant is known for its stunning aerial displays and vivid blue and green plumage. It is a frequent sight in Africa’s open savannas.', 'Rollers Troupant Bird')">
+              <img src="picture/gallery_Rollers Troupant Bird.png">
+              <p>Rollers Troupant Bird</p>
+            </div>
+            <div class="picture-item" onclick="openModal('picture/gallery_Blue Kingfisher.png', '<span class=bird-family>Family: Alcedinidae</span><br>The Blue Kingfisher is a skilled hunter, diving into water to catch fish with remarkable precision. Its bright blue wings and sharp beak are iconic in riverside habitats.', 'Blue Kingfisher')">
+              <img src="picture/gallery_Blue Kingfisher.png">
+              <p>Blue Kingfisher</p>
+            </div>
+            <div class="picture-item" onclick="openModal('picture/gallery_Western Bluebird.png', '<span class=bird-family>Family: Turdidae</span><br>The Western Bluebird is a charming songbird native to North America. With its deep blue feathers and rusty red chest, it is often seen perched in open fields.', 'Western Bluebird')">
+              <img src="picture/gallery_Western Bluebird.png">
+              <p>Western Bluebird</p>
+            </div>
+            <div class="picture-item" onclick="openModal('picture/gallery_Red Cardinal.png', '<span class=bird-family>Family: Cardinalidae</span><br>The Red Cardinal, with its bold red feathers and distinctive crest, is a familiar sight in North American backyards. It is known for its melodious songs and territorial behavior.', 'Red Cardinal')">
+              <img src="picture/gallery_Red Cardinal.png">
+              <p>Red Cardinal</p>
+            </div>     
+            <div class="picture-item" onclick="openModal('picture/gallery_Hummingbird.png', '<span class=bird-family>Family: Trochilidae</span><br>The Fiery-throated Hummingbird dazzles with its iridescent colors and rapid flight. Found in Costa Rica, it is one of the most vibrant hummingbirds in the world.', 'Fiery-throated Hummingbird')">
+              <img src="picture/gallery_Hummingbird.png">
               <p>Fiery-throated Hummingbird</p>
             </div>
-            <div class="picture-item">
-              <img src="picture/gallery_10.png">
-              <p>Tree Swallow</p>
+            <div class="picture-item" onclick="openModal('picture/gallery_Fringilla Coelebs.png', '<span class=bird-family>Family: Fringillidae</span><br>The Chaffinch is one of Europe’s most common finches, often spotted in parks and forests. Its melodic calls and pinkish-brown plumage make it a favorite among birdwatchers.', 'Fringilla Coelebs')">
+              <img src="picture/gallery_Fringilla Coelebs.png">
+              <p>Fringilla Coelebs</p>
             </div>
-            <div class="picture-item">
-              <img src="picture/gallery_11.png">
-              <p>Anna's Hummingbird</p>
+          </div>
+
+          <div class="list" style="display: none;">
+            <div class="picture-item" onclick="openModal('picture/gallery_Western Bluebird.png', 'Western Bluebird  is a relatively large white cockatoo found in wooded habitats in Australia, New Guinea, and some of the islands of Indonesia. They can be locally very numerous, leading to them sometimes being considered pests.', 'Western Bluebird')">
+              <img src="picture/gallery_Western Bluebird.png">
+              <p>Western Bluebird 2</p>
             </div>
-            <div class="picture-item">
-              <img src="picture/gallery_12.png">
-              <p>Cyanoptila Cumatilis</p>
+            <div class="picture-item" onclick="openModal('picture/gallery_Red Cardinal.png', 'Red Cardinal', 'Red Cardinal')">
+              <img src="picture/gallery_Red Cardinal.png">
+              <p>Red Cardinal 2</p>
+            </div>     
+            <div class="picture-item" onclick="openModal('picture/gallery_Hummingbird.png', 'Fiery-throated Hummingbird', 'Fiery-throated Hummingbird')">
+              <img src="picture/gallery_Hummingbird.png">
+              <p>Fiery-throated Hummingbird 2</p>
+            </div>
+            <div class="picture-item" onclick="openModal('picture/gallery_Fringilla Coelebs.png', 'Fringilla Coelebs', 'Fringilla Coelebs')">
+              <img src="picture/gallery_Fringilla Coelebs.png">
+              <p>Fringilla Coelebs 2</p>
+            </div>
+            <div class="picture-item" onclick="openModal('picture/gallery_Red-legged Honeycreeper.png', 'The sulphur-crested cockatoo is a relatively large white cockatoo found in wooded habitats in Australia, New Guinea, and some of the islands of Indonesia. They can be locally very numerous, leading to them sometimes being considered pests.', 'Red-legged Honeycreeper')">
+              <img src="picture/gallery_Red-legged Honeycreeper.png">
+              <p>Red-legged Honeycreeper 2</p>
+            </div>
+            <div class="picture-item" onclick="openModal('picture/gallery_Sulphur-crested Cockatoo.png', 'The sulphur-crested cockatoo is a relatively large white cockatoo found in wooded habitats in Australia, New Guinea, and some of the islands of Indonesia. They can be locally very numerous, leading to them sometimes being considered pests. A highly intelligent bird, they are well known in aviculture, although they can be demanding pets.', 'Sulphur-crested Cockatoo')">
+              <img src="picture/gallery_Sulphur-crested Cockatoo.png">
+              <p>Sulphur-crested Cockatoo 2</p>
+            </div>
+            <div class="picture-item" onclick="openModal('picture/gallery_Parus Caeruleus.png', 'The sulphur-crested cockatoo is a relatively large white cockatoo found in wooded habitats in Australia, New Guinea, and some of the islands of Indonesia. They can be locally very numerous, leading to them sometimes being considered pests. A highly intelligent bird, they are well known in aviculture, although they can be demanding pets.', 'Parus Caeruleus')">
+              <img src="picture/gallery_Parus Caeruleus.png">
+              <p>Parus Caeruleus 2</p>
+            </div>
+            <div class="picture-item" onclick="openModal('picture/gallery_Rollers Troupant Bird.png', 'Rollers Troupant Bird  is a relatively large white cockatoo found in wooded habitats in Australia, New Guinea, and some of the islands of Indonesia. They can be locally very numerous, leading to them sometimes being considered pests.', 'Rollers Troupant Bird')">
+              <img src="picture/gallery_Rollers Troupant Bird.png">
+              <p>Rollers Troupant Bird 2</p>
+            </div>
+            <div class="picture-item" onclick="openModal('picture/gallery_Blue Kingfisher.png', 'Blue Kingfisher is a relatively large white cockatoo found in wooded habitats in Australia, New Guinea, and some of the islands of Indonesia. They can be locally very numerous, leading to them sometimes being considered pests.', 'Blue Kingfisher')">
+              <img src="picture/gallery_Blue Kingfisher.png">
+              <p>Blue Kingfisher 2</p>
             </div>
           </div>
           <div class="page">
-            <a href="#"><img src="picture/icon-left.png"></a>
-            <a href="#" style="color: black;">1</a>
-            <a href="#" style="color: #7f7f7f;">2</a>
-            <a href="#" style="color: #7f7f7f;">3</a>
-            <a href="#" style="color: #7f7f7f;">4</a>
-            <a href="#" style="color: #7f7f7f;">5</a>
+            <a href="javascript:;" class="prev"><img src="picture/icon-left.png"></a>
+            <a href="javascript:;" class="cur">1</a>
+            <a href="javascript:;">2</a>
             <span>...</span>
-            <a href="#"><img src="picture/icon-right.png"></a>
+            <a href="javascript:;" class="next"><img src="picture/icon-right.png"></a>
           </div>
         </div>
       </div>
+
+      <!--Modal popup box -->
+      <div id="modal" class="modal" onclick="closeModalOutside(event)">
+        <div class="modal-content">
+          <div class="modal-header">
+            <img id="voice-icon" src="picture/call.png" alt="Voice Icon" class="voice-icon" onclick="yourVoiceFunction()">
+            <span id="bird-name" class="bird-name"></span>
+            <span class="close" onclick="closeModal()">&times;</span>
+          </div>
+
+          <img id="modal-img" src="" alt="Selected Image">
+          <p id="modal-caption"></p>
+        </div>
+      </div>
+
     </div>
   </div>
   <script src="jquery.min.js"></script>
   <script src="common.js"></script>
+  <script src="setting.js"></script>
 </body>
 
 </html>

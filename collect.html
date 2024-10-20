@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Collection</title>
+  <title>WingWatch-MyCollection</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -17,21 +17,20 @@
             </div>
           </a></li>
         <div class="nav-grouped-icons">
-          <li class="navicon"><a href="index.html"><img src="picture/home-icon.png" alt="Home" /><img
-                src="picture/home-icon-on.png" class="navicon" alt="Home" /></a></li>
-          <li><a href="collect.html"><img src="picture/eye-icon.png" alt="View" style="width: 32px; height: 32px;" /><img src="picture/eye-icon-on.png"
-                class="navicon" alt="View" /></a></li>
+          <li><a href="index.html"><img src="picture/home-icon.png" alt="Home" /><img src="picture/home-icon-on.png"
+                class="navicon" alt="Home" /></a></li>
+          <li class="navicon"><a href="collect.html"><img src="picture/eye-icon.png" alt="View" style="width: 32px; height: 32px;"/><img
+                src="picture/eye-icon-on.png" class="navicon" alt="View" style="width: 32px; height: 32px;"/></a></li>
           <li><a href="gallery.html"><img src="picture/gallery-icon.png" alt="Gallery" /><img
                 src="picture/gallery-icon-on.png" class="navicon" alt="Gallery" /></a></li>
         </div>
-        <li class="nav-setting"><a href="setting.html"><img src="picture/settings-icon.png" alt="Setting" /></a></li>
+        <li class="nav-setting"><a href="setting.html"><img src="picture/settings-icon.png" alt="Settings" /></a></li>
       </ul>
     </nav>
     <div class="all-content">
       <div class="top-box">
         <header>
-          <h1>WingWatch</h1>
-          <p>Birdwatching Made Effortless</p>
+          <h1 style="font-size: 46px; margin-top: -2px; font-family: 'Anuphan', Arial, Helvetica, sans-serif">MyCollection</h1>
         </header>
         <div>
           <form class="search-bar" action="" onsubmit="return soSubmit(this);">
@@ -44,38 +43,14 @@
           </a>
         </div>
       </div>
-      <div class="collect">
-        <div class="left-add">
-          <img src="picture/collect_charts.png">
-        </div>
+      <div class="collect listmid">
         <div class="list-page">
           <div class="list">
-            <div class="picture-item">
-              <img src="picture/collect_1.png">
-              <p>Australian White Ibis</p>
-            </div>
-            <div class="picture-item">
-              <img src="picture/collect_2.png">
-              <p>Green Head Duck</p>
-            </div>
-            <div class="picture-item">
-              <img src="picture/collect_3.png">
-              <p>White Face Owl</p>
-            </div>
-            <div class="picture-item">
-              <img src="picture/collect_4.png">
-              <p>Canadian White Goose</p>
-            </div>
-            <div class="picture-item">
-              <img src="picture/collect_5.png">
-              <p>Tasmanian Flame Robin</p>
-            </div>
-            <div class="picture-item">
-              <img src="picture/collect_6.png">
-              <p>American Wild Eagle</p>
-            </div>
+            <!-- Dynamic content will be inserted here -->
           </div>
-          <div class="page">
+
+          <!-- UI but not functional -->
+         <!--  <div class="page">
             <a href="#"><img src="picture/icon-left.png"></a>
             <a href="#" style="color: black;">1</a>
             <a href="#" style="color: #7f7f7f;">2</a>
@@ -84,13 +59,67 @@
             <a href="#" style="color: #7f7f7f;">5</a>
             <span>...</span>
             <a href="#"><img src="picture/icon-right.png"></a>
+          </div> -->
+          
+          <div class="info" style="display: none;">
+            <div class="pics">
+              <img src="picture/ball1.png">
+              <div class="picture-item">
+                <img id="info-image" src="" alt="">
+              </div>
+              <img src="picture/ball2.png">
+            </div>
+            <div class="desc">
+              <div class="head">
+                <img src="picture/left.png" class="back" alt="Back">
+                <a href="./gallery.html"><img src="picture/imgs.png" alt="Gallery"></a>
+              </div>
+              <div class="text">
+                <div id="bird-info">
+                </div>
+              </div>
+              <div class="imgs">
+                <img src="picture/maps.jpg">
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <div id="modal-pop-up-upload" class="modal-pop-up" style = "display:none">
+    <div class="modal-pop-up-content">
+      <span class="modal-pop-up-close">&times;</span>
+      <h2>Upload Specimen Information</h2>
+      <form id="modal-pop-up-specimen-form">
+        <div class="modal-file">
+          <div class="icon">+</div>
+          <div class="file" id="modal-pop-up-image-name"></div>
+          <input type="file" id="modal-pop-up-image-upload" accept="image/*" required>
+        </div>
+        <div class="modal-pop-up-form-group">
+          <input type="text" id="modal-pop-up-location" placeholder="Location" readonly>
+          <button type="button" onclick="openLocationPickerModal()">Select Location</button>
+        </div>
+        <div class="modal-pop-up-form-group">
+          <input type="text" id="modal-pop-up-species" placeholder="Species" required>
+        </div>
+        <div class="modal-pop-up-form-group">
+          <input type="datetime-local" id="modal-pop-up-time" required>
+        </div>
+        <!-- <button type="submit" class="modal-pop-up-submit">Submit</button> -->
+        <a href="./collect.html"
+          style="margin-top: 10px; padding: 12px 24px; background-color: rgb(243, 108, 39); color: white; border: none; cursor: pointer; border-radius: 25px; font-size: 16px; font-weight: bold; transition: all 0.3s ease;">Submit</a>
+
+      </form>
+    </div>
+  </div>
+  <script src="modal-pop-up.js"></script>
+  
   <script src="jquery.min.js"></script>
   <script src="common.js"></script>
+  <script src ="collect.js"></script>
+  
 </body>
 
 </html>

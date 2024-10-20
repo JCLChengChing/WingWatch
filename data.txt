@@ -1,0 +1,9 @@
+
+Entry ID: 1
+Location: Lat: -27.497734, Lng: 153.005948
+Species: 2
+Time: 2024-10-07T18:30
+Image: user_bird/1729413041.png
+----------------------
+
+
