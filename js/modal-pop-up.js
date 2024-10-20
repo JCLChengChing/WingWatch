@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // Function to open the modal
   function openModal() {
     modal.style.display = "block";
+    // Focus the first input field in the modal
+    document.getElementById("modal-pop-up-species").focus();
   }
   
   // When the user clicks on <span> (x), close the modal
@@ -22,14 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   }
   
-  // Handle form submission
-/*   document.getElementById("modal-pop-up-specimen-form").onsubmit = function(event) {
-      event.preventDefault(); 
-      // Here you would typically send the form data to your server
-      console.log("Form submitted");
-      modal.style.display = "none"; 
-  } */
-  
   // Make openModal function globally accessible
   window.openModal = openModal;
   
@@ -38,8 +32,12 @@ document.addEventListener('DOMContentLoaded', function() {
       // Implement map modal functionality here
       console.log("Opening map modal");
   }
+  
+  // Prevent event propagation in the modal
+  modal.addEventListener('click', function(event) {
+    event.stopPropagation();
+  });
 });
-
 
 document.getElementById('modal-pop-up-image-upload').addEventListener('change', function(event) {
   var file = event.target.files[0];

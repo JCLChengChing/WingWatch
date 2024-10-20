@@ -62,7 +62,6 @@ $(document).ready(function() {
                 $('#search-input').val(firstSuggestion);
             }
             suggestionsList.empty().hide(); // Hide the suggestions list
-            $('#search-input').focus(); // Keep focus on the search input
         }
     });
 });
