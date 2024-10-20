@@ -1,6 +1,9 @@
 /**
  * Google Maps API Loader
  * This module dynamically loads the Google Maps JavaScript API and provides a method to import libraries.
+ *
+ * Reference:
+ * Google Developers. (n.d.). Load the Maps JavaScript API. https://developers.google.com/maps/documentation/javascript/load-maps-js-api
  */
 
 ((config) => {

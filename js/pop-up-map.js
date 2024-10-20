@@ -1,6 +1,10 @@
 /**
  * Pop-up Map Module
  * This module handles the functionality for the pop-up map used for selecting bird sighting locations.
+ *
+ * References:
+ * Leaflet API Reference: https://leafletjs.com/reference.html
+ * Stack Overflow: Removing layers from a Leaflet map: https://stackoverflow.com/questions/31386562/removing-layers-from-a-leaflet-map
  */
 
 // Global variables

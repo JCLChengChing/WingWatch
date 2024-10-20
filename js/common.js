@@ -60,3 +60,10 @@ $(function () {
     }
   });
 });
+
+/**
+ * References:
+ * W3Schools. (n.d.). Window alert(). https://www.w3schools.com/jsref/met_win_alert.asp
+ * MDN Web Docs. (n.d.). Element.setAttribute(). https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute
+ * Stack Overflow. (2014). Simple pagination in JavaScript. https://stackoverflow.com/questions/25434813/simple-pagination-in-javascript
+ */

@@ -118,3 +118,8 @@ function openModal() {
   var modal = document.getElementById("modal-pop-up-upload");
   modal.style.display = "block";
 }
+
+/**
+ * References:
+ * Eke, V. (2022, October 3). How to build a modal with JavaScript. freeCodeCamp. https://www.freecodecamp.org/news/how-to-build-a-modal-with-javascript/
+ */

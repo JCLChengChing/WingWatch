@@ -1,6 +1,9 @@
 /**
  * Modal Pop-up Module
  * This module handles the functionality for the modal pop-up used for uploading bird sightings.
+ *
+ * Reference:
+ * MDN Web Docs. (n.d.). Event: stopPropagation() method. https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation
  */
 
 document.addEventListener('DOMContentLoaded', function() {

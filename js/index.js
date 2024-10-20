@@ -3,6 +3,17 @@
  * This module handles the main functionality for fetching, processing, and displaying bird sightings on a map.
  */
 
+/**
+ * References:
+ * Stack Overflow. (2019). Remove a class on selection and add class to others. https://stackoverflow.com/questions/56454655/remove-a-class-on-selection-and-add-class-to-others
+ * MDN Web Docs. (n.d.). Using the Fetch API. https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+ * Stack Overflow. (2021). Function to calculate distance between two coordinates. https://stackoverflow.com/questions/18883601/function-to-calculate-distance-between-two-coordinates
+ * Stack Overflow. (2013). What is the correct way to write HTML using JavaScript? https://stackoverflow.com/questions/1533568/what-is-the-correct-way-to-write-html-using-javascript
+ * Stack Overflow. (2012). How to set zoom level in Google Map. https://stackoverflow.com/questions/11454229/how-to-set-zoom-level-in-google-map
+ * W3Schools. (n.d.). Google Maps Introduction. https://www.w3schools.com/graphics/google_maps_intro.asp
+ * W3Schools. (n.d.). AJAX Introduction. https://www.w3schools.com/js/js_ajax_intro.asp
+ */
+
 let globalMarkers = [];
 let currentTimeframe = 'month'; // Default timeframe
 let currentSearchTerm = '';

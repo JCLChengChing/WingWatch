@@ -2,6 +2,9 @@
  * Main Styles for Bird Watching Application
  * This stylesheet defines the visual appearance for the entire application.
  * It includes styles for layout, navigation, content areas, and various components.
+ *
+ * References:
+ * MDN Web Docs. (n.d.). box-sizing. https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing
  */
 
 /* Reset and base styles */
@@ -206,7 +209,7 @@ header p {
   border: 0;
   border-bottom: 1px solid #000;
   outline: none;
-  background: url(./picture/icon-search.png) no-repeat center left / 24px;
+  background: url(/picture/icon-search.png) no-repeat center left / 24px;
   font-size: 28px;
 }
 
@@ -969,3 +972,4 @@ main {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+

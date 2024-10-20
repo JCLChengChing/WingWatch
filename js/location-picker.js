@@ -1,6 +1,9 @@
 /**
  * Location Picker Module
  * This module handles the functionality for picking a location on a map.
+ *
+ * Reference:
+ * OpenGeo. (n.d.). Leaflet location picker. https://opengeo.tech/maps/leaflet-locationpicker/
  */
 
 // Global variables

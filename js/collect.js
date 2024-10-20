@@ -213,3 +213,10 @@ $('#modal-pop-up-image-upload').change(function(event) {
     var file = event.target.files[0];
     $('#modal-pop-up-image-name').text(file.name);
 });
+
+/**
+ * References:
+ * YouTube. (n.d.). [Video]. https://www.youtube.com/watch?v=wVnimcQsuwk
+ * MDN Web Docs. (n.d.). Leaflet: An open-source JavaScript library for mobile-friendly interactive maps. https://leafletjs.com/
+ * Stack Overflow. (2013). How to change CSS property using JavaScript. https://stackoverflow.com/questions/15241915/how-to-change-css-property-using-javascript
+ */

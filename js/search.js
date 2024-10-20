@@ -1,6 +1,10 @@
 /**
  * Bird Search Module
  * This module handles the search functionality for bird names, including autocomplete suggestions.
+ *
+ * References:
+ * Stack Overflow: Removing layers from a Leaflet map: https://stackoverflow.com/questions/31386562/removing-layers-from-a-leaflet-map
+ * W3Schools: How to create an Autocomplete: https://www.w3schools.com/howto/howto_js_autocomplete.asp
  */
 
 $(document).ready(function() {
