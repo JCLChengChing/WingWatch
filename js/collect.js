@@ -1,9 +1,48 @@
 $(function(){
+    // Map handler object
+    const MapHandler = {
+      map: null,
+      currentMarker: null,
+
+      initMap: function() {
+        if (!this.map) {
+          this.map = L.map('bird-location-map').setView([0, 0], 2);
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+          }).addTo(this.map);
+        }
+      },
+
+      showOnMap: function(lat, lon) {
+        if (!this.map) {
+          this.initMap();
+        }
+
+        this.map.setView([lat, lon], 14);
+        
+        if (this.currentMarker) {
+          this.map.removeLayer(this.currentMarker);
+        }
+        
+        this.currentMarker = L.marker([lat, lon]).addTo(this.map);
+
+        // Ensure the map renders correctly
+        setTimeout(() => {
+          this.map.invalidateSize();
+        }, 100);
+      }
+    };
+
+    function initBirdLocationMap() {
+      if (MapHandler.map) {
+        MapHandler.map.remove();
+      }
+      MapHandler.initMap();
+    }
+
     function showInfo(imagePath, location, species, time, lat, lon) {
       // Format the time to remove 'T'
       const formattedTime = time.replace('T', ' ');
-
-      
 
       $('.list-page .list').hide();
       $('.list-page .page').hide();
@@ -11,10 +50,12 @@ $(function(){
   
       $('#info-image').attr('src', imagePath);
       $('#bird-info').html(`
-        <p>Location: <a href="#" onclick="showOnMap(${lat}, ${lon})">${location}</a></p>
         <p>Species: ${species}</p>
         <p>Time: ${formattedTime}</p>
       `);
+
+      // Show the location on the map
+      MapHandler.showOnMap(lat, lon);
     }
 
     function hideInfo() {
@@ -99,15 +140,6 @@ $(function(){
         console.error('Error loading data:', error);
       });
 });
-
-// Function to show marker on the map
-function showOnMap(lat, lon) {
-  // Set the map's view to the clicked coordinates and add a marker
-  map.setView([lat, lon], 14); // Zoom to level 14
-  L.marker([lat, lon]).addTo(map)
-    .bindPopup(`Location: [${lat}, ${lon}]`)
-    .openPopup();
-}
 
 // Function to open the modal
 function openModal() {
