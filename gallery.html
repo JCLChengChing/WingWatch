@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WingWatch - Bird Gallery</title>
-  <link rel="stylesheet" href="css/styles.css"> 
-  <script src="js/gallery-pop-up.js" defer></script> 
+  <link rel="stylesheet" href="css/styles.css"> <!-- Updated path -->
+  <script src="js/gallery-pop-up.js" defer></script> <!-- Updated path -->
 </head>
 
 <body>
@@ -139,12 +139,12 @@
       </div>
 
       <!--Modal popup box -->
-      <div id="modal" class="modal" onclick="closeModalOutside(event)">
-        <div class="modal-content">
+      <div id="modal" class="modal">
+        <div class="modal-content" style="width: 800px; border-radius: 30px;">
           <div class="modal-header">
             <img id="voice-icon" src="picture/call.png" alt="Voice Icon" class="voice-icon" onclick="yourVoiceFunction()">
             <span id="bird-name" class="bird-name"></span>
-            <span class="close" onclick="closeModal()">&times;</span>
+            <span class="close"><a href="gallery.html">&times;</a></span>
           </div>
 
           <img id="modal-img" src="" alt="Selected Image">
@@ -154,9 +154,9 @@
 
     </div>
   </div>
-  <script src="js/jquery.min.js"></script> 
-  <script src="js/common.js"></script> 
-  <script src="js/setting.js"></script> 
+  <script src="js/jquery.min.js"></script> <!-- Updated path -->
+  <script src="js/common.js"></script> <!-- Updated path -->
+  <script src="js/setting.js"></script> <!-- Updated path -->
 </body>
 
 </html>

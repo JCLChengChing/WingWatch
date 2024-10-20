@@ -1,68 +1,120 @@
 .right-content {
-    padding: 10px;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
 
-  #records h2 {
-    color: darkgreen;
-    font-size: 1.2em;
-    margin-bottom: 5px;
-  }
+#records h2 {
+  color: black;
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
 
-  #records .record {
-    padding: 8px;
-    margin-top: 5px;
-    background-color: white;
-    border-bottom: 1px solid #eee;
-  }
+#records .record {
+  padding: 8px;
+  margin-top: 5px;
+  background-color: white;
+  border-bottom: 1px solid #eee;
+}
 
-  #last-five-locations {
-    background-color: #fafafa;
-    padding: 10px;
-    border-top: 2px solid #e0e0e0;
-    margin-top: 20px;
-  }
+#last-five-locations {
+  background-color: #fafafa;
+  padding: 10px;
+  border-top: 2px solid #e0e0e0;
+  margin-top: 20px;
+}
 
-  #last-five-locations h2 {
-    color: #333;
-    font-size: 1.4em;
-  }
+#last-five-locations h2 {
+  color: black;
+  font-size: 1.4em;
+}
 
-  #location-list {
-    list-style-type: none;
-    padding: 0;
-  }
+#location-list {
+  list-style-type: none;
+  padding: 0;
+}
 
-  #location-list li {
-    padding: 8px;
-    margin-bottom: 2px;
-    background-color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
+#location-list li {
+  padding: 8px;
+  margin-bottom: 2px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: black !important; /* Force black color and override any other styles */
+}
 
-  #location-list li:hover {
-    background-color: #eef;
-  }
+#location-list li:nth-child(even) {
+  background-color: #f8f8f8;
+}
 
-  #location-list li:active {
-    background-color: #ddd;
-  }
-  button.active {
-    background-color: #4CAF50; /* Green */
-    color: white;
-  }
+#location-list li:hover {
+  background-color: rgb(243, 194, 174); /* Light orange */
+  color: black !important; /* Ensure text stays black on hover */
+}
 
-  button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
+#location-list li:active {
+  background-color: rgb(243, 108, 39); /* Darker orange for click effect */
+  color: black !important; 
+}
 
-  button:hover {
-    background-color: #45a049;
-  }
+button.active {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: black;
+}
+
+button:hover {
+  background-color: rgb(243, 194, 174); /* Light orange */
+}
+
+#last-seen-btn, #record-btn {
+  transition: background-color 0.3s;
+}
+
+#last-seen-btn:hover, #record-btn:hover {
+  background-color: rgb(243, 194, 174); /* Light orange */
+}
+
+.modal-pop-up {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-pop-up-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.modal-pop-up-close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.modal-pop-up-close:hover,
+.modal-pop-up-close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}

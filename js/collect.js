@@ -1,8 +1,3 @@
-
-
-// to do: Initialize the map and set its view to the initial coordinates
-
-
 $(function(){
     function showInfo(imagePath, location, species, time, lat, lon) {
       // Format the time to remove 'T'
@@ -41,6 +36,7 @@ $(function(){
         // Add the "add" item at the beginning
         const addItem = $('<div>').addClass('picture-item add');
         addItem.append($('<span>').text('+'));
+        addItem.click(openModal); // Open modal when clicking the "+" item
         listDiv.append(addItem);
   
         records.forEach((record, index) => {
@@ -112,3 +108,40 @@ function showOnMap(lat, lon) {
     .bindPopup(`Location: [${lat}, ${lon}]`)
     .openPopup();
 }
+
+// Function to open the modal
+function openModal() {
+    $('#modal-pop-up-upload').css('display', 'block');
+}
+
+// Function to close the modal
+function closeModal() {
+    $('#modal-pop-up-upload').css('display', 'none');
+}
+
+// Add click event listener for the "+" button (assuming you have one)
+$('.add').click(openModal);
+
+// Close the modal when clicking the close button
+$('.modal-pop-up-close').click(closeModal);
+
+// Close the modal when clicking outside of it
+$(window).click(function(event) {
+    if (event.target == $('#modal-pop-up-upload')[0]) {
+        closeModal();
+    }
+});
+
+// Add click event listener for the new button
+$('#open-modal-btn').click(openModal);
+
+// Handle closing the modal
+$('.modal-pop-up-close').click(function() {
+    $('#modal-pop-up-upload').hide();
+});
+
+// Add this function to handle file selection inside the modal
+$('#modal-pop-up-image-upload').change(function(event) {
+    var file = event.target.files[0];
+    $('#modal-pop-up-image-name').text(file.name);
+});

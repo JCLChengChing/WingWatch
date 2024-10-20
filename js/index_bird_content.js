@@ -3,13 +3,10 @@ function updateSidebar(occurrences) {
   $("#records").empty();
   $("#location-list").empty();
 
-  // Update the records, only displaying the bird's commonName
-  const recordsHtml = occurrences.map(occurrence => {
-    const commonName = occurrence.vernacularName || occurrence.species || 'Unknown';
-    return `<section class="record map-item"><h2>${commonName}</h2></section>`;
-  }).join('');
-
-  $("#records").html(recordsHtml);
+  // Update the records
+  if (occurrences.length > 0) {
+    $("#records").html('<p>No record</p>');
+  }
 
   // Update the last 5 seen times (display time, but clicking will navigate to the corresponding coordinates)
   const locationsHtml = occurrences.slice(0, 5).map((occurrence) => {
@@ -33,10 +30,6 @@ function zoomToLocation(lat, lon) {
   map.setZoom(20); // Zoom in closer to the location
 }
 
-
-
-
-  
 document.addEventListener('DOMContentLoaded', function() {
   const lastSeenBtn = document.getElementById('last-seen-btn');
   const recordBtn = document.getElementById('record-btn');
@@ -44,36 +37,67 @@ document.addEventListener('DOMContentLoaded', function() {
   const recordsDiv = document.getElementById('records');
   const lastFiveLocationsDiv = document.getElementById('last-five-locations');
 
-  // 初始化，默认显示最后5个发现地点
+  const selectedColor = 'rgb(243, 108, 39)'; // Darker orange color
+  const unselectedColor = 'rgb(243, 194, 174)'; // Lighter orange color
+
+  // Initially set the correct display and colors
   lastFiveLocationsDiv.style.display = 'block';
   recordsDiv.style.display = 'none';
+  lastSeenBtn.style.backgroundColor = selectedColor;
+  recordBtn.style.backgroundColor = unselectedColor;
 
-  // 点击 "Last seen" 按钮时，显示最后5个发现地点
   lastSeenBtn.addEventListener('click', function() {
     lastFiveLocationsDiv.style.display = 'block';
     recordsDiv.style.display = 'none';
     
-    // 修改按钮样式
-    lastSeenBtn.style.backgroundColor = 'rgb(243 194 174)';
-    recordBtn.style.backgroundColor = ''; // 恢复默认颜色
+    lastSeenBtn.style.backgroundColor = selectedColor;
+    recordBtn.style.backgroundColor = unselectedColor;
   });
 
-  // 点击 "Record" 按钮时，显示鸟类记录
   recordBtn.addEventListener('click', function() {
     lastFiveLocationsDiv.style.display = 'none';
     recordsDiv.style.display = 'block';
     
-    // 修改按钮样式
-    recordBtn.style.backgroundColor = 'rgb(243 194 174)';
-    lastSeenBtn.style.backgroundColor = ''; // 恢复默认颜色
+    recordBtn.style.backgroundColor = selectedColor;
+    lastSeenBtn.style.backgroundColor = unselectedColor;
+
+    // Check if there are any records, if not, display "No record"
+    if ($("#records").children().length === 0) {
+      $("#records").html('<p>No record</p>');
+    }
   });
+
+  // Get the modal
+  var modal = document.getElementById("modal-pop-up-upload");
+
+  // Get the button that opens the modal
+  var btn = document.getElementById("open-modal-btn");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("modal-pop-up-close")[0];
+
+  // When the user clicks the button, open the modal 
+  btn.onclick = function() {
+    modal.style.display = "block";
+    console.log("Modal should be open now");
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
 });
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+// Make sure this function is defined globally
+function openModal() {
+  alert("openModal function called");
+  var modal = document.getElementById("modal-pop-up-upload");
+  modal.style.display = "block";
+}

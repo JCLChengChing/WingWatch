@@ -37,15 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-/*     var specimenForm = document.getElementById("modal-pop-up-specimen-form");
-    if (specimenForm) {
-        specimenForm.onsubmit = function(event) {
-            event.preventDefault();
-            console.log("Form submitted");
-            modal.style.display = "none";
-        }
-    } */
-
     window.openModal = openModal;
 
     window.openLocationPickerModal = function() {

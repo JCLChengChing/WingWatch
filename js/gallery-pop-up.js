@@ -1,5 +1,5 @@
-// For the gallery page's popup click event
 function openModal(imageSrc, captionText, birdName) {
+  console.log("Opening modal with:", imageSrc, captionText, birdName);
   var modal = document.getElementById("modal");
   var modalImg = document.getElementById("modal-img");
   var caption = document.getElementById("modal-caption");
@@ -12,15 +12,7 @@ function openModal(imageSrc, captionText, birdName) {
 }
 
 function closeModal() {
+  console.log("Closing modal");
   var modal = document.getElementById("modal");
   modal.style.display = "none";
-}
-
-// Function to close modal if clicked outside modal content
-function closeModalOutside(event) {
-  var modal = document.getElementById("modal");
-
-  if (event.target === modal) {
-      modal.style.display = "none";
-  }
 }

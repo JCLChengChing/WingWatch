@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WingWatch-MyCollection</title>
   <link rel="stylesheet" href="css/styles.css"> 
+  <link rel="stylesheet" href="css/modal-pop-up.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 
 <body>
   <div class="container">
@@ -47,18 +49,8 @@
           <div class="list">
             <!-- Dynamic content will be inserted here -->
           </div>
-
-          <!-- UI but not functional -->
-         <!--  <div class="page">
-            <a href="#"><img src="picture/icon-left.png"></a>
-            <a href="#" style="color: black;">1</a>
-            <a href="#" style="color: #7f7f7f;">2</a>
-            <a href="#" style="color: #7f7f7f;">3</a>
-            <a href="#" style="color: #7f7f7f;">4</a>
-            <a href="#" style="color: #7f7f7f;">5</a>
-            <span>...</span>
-            <a href="#"><img src="picture/icon-right.png"></a>
-          </div> -->
+          <!-- Add this button to open the modal -->
+          <button id="open-modal-btn" class="add-specimen-btn">+</button>
           
           <div class="info" style="display: none;">
             <div class="pics">
@@ -86,38 +78,45 @@
       </div>
     </div>
   </div>
-  <div id="modal-pop-up-upload" class="modal-pop-up" style = "display:none">
+  <div id="modal-pop-up-upload" class="modal-pop-up">
     <div class="modal-pop-up-content">
       <span class="modal-pop-up-close">&times;</span>
       <h2>Upload Specimen Information</h2>
-      <form id="modal-pop-up-specimen-form">
+      <form id="modal-pop-up-specimen-form" action = "submit_data.php" method ="POST" enctype ="multipart/form-data">
         <div class="modal-file">
           <div class="icon">+</div>
           <div class="file" id="modal-pop-up-image-name"></div>
-          <input type="file" id="modal-pop-up-image-upload" accept="image/*" required>
+          <input type="file" id="modal-pop-up-image-upload" name = "image" accept="image/*" required>
         </div>
         <div class="modal-pop-up-form-group">
-          <input type="text" id="modal-pop-up-location" placeholder="Location" readonly>
+          <input type="text" id="modal-pop-up-location" name = "location" placeholder="Location" readonly>
           <button type="button" onclick="openLocationPickerModal()">Select Location</button>
         </div>
         <div class="modal-pop-up-form-group">
-          <input type="text" id="modal-pop-up-species" placeholder="Species" required>
+          <input type="text" id="modal-pop-up-species" name = "species" placeholder="Species" required>
         </div>
         <div class="modal-pop-up-form-group">
-          <input type="datetime-local" id="modal-pop-up-time" required>
+          <input type="datetime-local"  name = "time" id="modal-pop-up-time" required>
         </div>
-        <!-- <button type="submit" class="modal-pop-up-submit">Submit</button> -->
-        <a href="./collect.html"
-          style="margin-top: 10px; padding: 12px 24px; background-color: rgb(243, 108, 39); color: white; border: none; cursor: pointer; border-radius: 25px; font-size: 16px; font-weight: bold; transition: all 0.3s ease;">Submit</a>
-
+        <button type="submit" class="modal-pop-up-submit" style="margin-top: 10px; padding: 12px 24px; background-color: rgb(243, 108, 39); color: white; border: none; cursor: pointer; border-radius: 25px; font-size: 16px; font-weight: bold; transition: all 0.3s ease;">
+          Submit
+      </button>
       </form>
     </div>
   </div>
-  <script src="js/modal-pop-up.js"></script>
+
+  <div id="location-picker-modal">
+    <div id="location-picker-map"></div>
+    <button id="location-picker-confirm-button">Confirm Location</button>
+  </div>
+
   <script src="js/jquery.min.js"></script>
   <script src="js/common.js"></script>
+  <script src="js/location-picker.js"></script>
   <script src="js/collect.js"></script>
-  
+  <script src="js/modal-pop-up.js"></script>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="js/pop-up-map.js"></script>
 </body>
 
 </html>
