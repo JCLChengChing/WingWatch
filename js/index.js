@@ -256,7 +256,7 @@ function processOccurrences(data, map) {
             <div class="tips-footer">
                 <button class="more-btn">More</button>
                 <div class="tips-image">
-                    <img src="picture/icon-msg.png" alt="Bird Location" width="32" height="32">
+                    <img src="picture/icon-msg.png" alt="Bird Location" width="32" height="32" onclick="yourVoiceFunction()" >
                 </div>
             </div>            
         </div>

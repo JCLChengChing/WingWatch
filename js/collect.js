@@ -41,14 +41,14 @@ $(function(){
     }
 
     function showInfo(imagePath, location, species, time, lat, lon) {
+      // Format the time to remove 'T'
+      const formattedTime = time.replace('T', ' ');
+
       $('.list-page .list').hide();
       $('.list-page .page').hide();
       $('.list-page .info').fadeIn();
-
+  
       $('#info-image').attr('src', imagePath);
-      
-      const formattedTime = time.replace('T', ' ');
-      
       $('#bird-info').html(`
         <p>Species: ${species}</p>
         <p>Time: ${formattedTime}</p>
@@ -56,6 +56,11 @@ $(function(){
 
       // Show the location on the map
       MapHandler.showOnMap(lat, lon);
+
+      // Trigger a resize event on the map
+      setTimeout(() => {
+        MapHandler.map.invalidateSize();
+      }, 100);
     }
 
     function hideInfo() {
@@ -66,22 +71,27 @@ $(function(){
 
     $('.list-page .desc .head .back').click(hideInfo);
 
+    // Initialize the map when the page loads
+    MapHandler.initMap();
+
+    const listDiv = $('.list');
+
+    // Add the "add" item at the beginning
+    const addItem = $('<div>').addClass('picture-item add');
+    addItem.append($('<span>').text('+'));
+    addItem.click(function() {
+      openModal(); // Handle the "add" button click by opening the modal
+    });
+    listDiv.append(addItem);
+
     fetch('data.txt')
       .then(response => response.text())
       .then(data => {
-        const listDiv = $('.list');
         const records = data.trim().split('----------------------\n');
-  
-        listDiv.empty();
-  
-        // Add the "add" item at the beginning
-        const addItem = $('<div>').addClass('picture-item add');
-        addItem.append($('<span>').text('+'));
-        listDiv.append(addItem);
-  
+
         records.forEach((record, index) => {
           if (record.trim() === '') return; // Skip empty records
-  
+
           const lines = record.split('\n');
           let entryId = '';
           let location = '';
@@ -90,7 +100,7 @@ $(function(){
           let imagePath = '';
           let lat = 0;
           let lon = 0;
-  
+
           lines.forEach(line => {
             if (line.startsWith('Entry ID:')) {
               entryId = line.replace('Entry ID:', '').trim();
@@ -110,27 +120,20 @@ $(function(){
               imagePath = line.replace('Image:', '').trim();
             }
           });
-  
+
           const itemDiv = $('<div>').addClass('picture-item').attr('data-entry-id', entryId);
-          if (index >= 0) {
-            itemDiv.addClass('ball');
-          }
-  
+          itemDiv.addClass('ball');
+
           const img = $('<img>').attr('src', 'picture/ball.png');
-  
+
           img.click(function() {
-            if ($(this).parent().hasClass('add')) {
-              openModal(); // Handle the "add" button click by opening the modal
-              return;
-            }
-            
             if ($(this).parent().hasClass('ball')) {
               $(this).attr('src', imagePath);
               $(this).parent().removeClass('ball');
             }
             showInfo(imagePath, location, species, time, lat, lon);
           });
-  
+
           itemDiv.append(img);
           const desc = $('<p>').text(species);
           itemDiv.append(desc);

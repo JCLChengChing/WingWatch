@@ -151,12 +151,20 @@
           <p id="modal-caption"></p>
         </div>
       </div>
-
+      <audio id="audio-player" src="birdsong/mixkit-forest-birds-singing-1212.wav"></audio>
     </div>
   </div>
   <script src="js/jquery.min.js"></script> <!-- Updated path -->
   <script src="js/common.js"></script> <!-- Updated path -->
   <script src="js/setting.js"></script> <!-- Updated path -->
+  <script>
+    function yourVoiceFunction() {
+      var audioPlayer = document.getElementById("audio-player");
+      audioPlayer.play().catch(function(error) {
+        console.error("Error playing audio:", error);
+      });
+    }
+  </script>
 </body>
 
 </html>

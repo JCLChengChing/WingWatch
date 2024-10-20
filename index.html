@@ -128,7 +128,7 @@
   </div>
 
   <div id="loading"></div>
-
+  <audio id="audio-player" src="birdsong/mixkit-forest-birds-singing-1212.wav"></audio>
 
   </div>
   <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
@@ -145,5 +145,13 @@
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   <script src="js/index_bird_content.js"></script>
   <script src="js/setting.js"></script>
+  <script>
+    function yourVoiceFunction() {
+      var audioPlayer = document.getElementById("audio-player");
+      audioPlayer.play().catch(function(error) {
+        console.error("Error playing audio:", error);
+      });
+    }
+  </script>
 </body>
 </html>
